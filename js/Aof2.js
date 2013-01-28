@@ -53,7 +53,7 @@ setOperationType = function(str) {
     return false;
 }
 */
-var toggleOperation = function(str,e) {
+var toggleOperation = function(str) {
     operationType[str] = !operationType[str];
     if (operationType[str]) {
 	document.getElementById('option-'+str).style.backgroundColor = operationColor[str];
@@ -85,8 +85,12 @@ function cancelBubble(e) {
 // offset of canvas
 var canvasOffsetX = 5;
 var canvasOffsetY = 95;
+var canvasWidth = 800;
+var canvasHeight = 500;
+var paper = new Raphael(document.getElementById('canvas_container'), canvasWidth, canvasHeight);
+document.getElementById('canvas_container').style.width = canvasWidth+'px';
+document.getElementById('canvas_container').style.height = canvasHeight+'px';
 
-var paper = new Raphael(document.getElementById('canvas_container'), 700, 500);
 
 // styling attributes
 
@@ -416,32 +420,39 @@ var aOfOne = function(x,y,i) {
 };
 
 // draw copies of A(1)
-aOfOneOffset = [[0,2], //moved this one down 2 steps
-		[4,4],
-		[7,6],
-		[10,7],
-		[14,10],
-		[17,11],
-		[20,13],
-		[24,15]]; //and moved this one up 2 steps
+aOfOneOffset = [[0,0], // made aspect ratio 2 to 1, so vertical position equals
+		[8,4], // degree, while lines defining the same operation remain 
+		[12,6], // parallel
+		[14,7],
+		[20,10],
+		[22,11],
+		[26,13],
+		[34,17]];
+
+    
 for (var i=0; i < aOfOneOffset.length; i++) {
     x = aOfOneOffset[i][0];
     y = aOfOneOffset[i][1];
-    aOfOne(2*gridSize+x*gridSize,20 + y*gridSize,x);
+    aOfOne(2*gridSize+x*gridSize,25 + y*gridSize,x);
 };
 
 // connect copies of A(1)
 // list pairs of indices of top nodes
-var connectAOfOne = {'square': [[0,4],
-				[10,17],
-				[7,14],  // change order to set top path
-				[20,24]],
-		     'curved': [[4,7],
-				[17,20]],
-		     'straight': [[7,10],
-				  [14,17]]};
-var squareLine = function(id0,id1) {
-    squareStep = .9*gridSize;
+var connectAOfOne = {'square': [[0,8],
+				[12,20],
+				[14,22],  // change order to set top path
+				[26,34]],
+		     'curved': [[8,12],
+				[22,26]],
+		     'straight': [[12,14],
+				  [20,22]]};
+var squareLine = function(id0,id1,squareStepFactor) {
+    /*
+      Draw square line; step factor needs to be passed as an argument
+      or it will be constant for all calls to the function (using the
+      last-set value) -- I don't know why this is! [Niles]
+     */
+    var squareStep = squareStepFactor*gridSize;
     var x0 = dot[id0].data('position')[0];
     var y0 = dot[id0].data('position')[1];
     var x1 = dot[id1].data('position')[0];
@@ -477,10 +488,19 @@ connectionLines = {'square': squareLine,
 		   'curved': curvedLine,
 		   'straight': straightLine};
 for (lineType in connectAOfOne) {
+    // draw the lines, using function determined by line type
     idList = connectAOfOne[lineType];
     drawPath = connectionLines[lineType];
     for (var i = 0; i < idList.length; i++) {
-	drawPath(idList[i][0]+'-0',idList[i][1]+'-0');
+	// determine square step size; the third argument for other
+	// line types is ignored
+	if (idList[i][0] == 12) {
+	    var squareStepFactor = 1.1;
+	}
+	else {
+	    var squareStepFactor = .9;
+	}
+	drawPath(idList[i][0]+'-0',idList[i][1]+'-0',squareStepFactor);
     }
 }
 
