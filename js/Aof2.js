@@ -85,7 +85,7 @@ function cancelBubble(e) {
 // offset of canvas
 var canvasOffsetX = 5;
 var canvasOffsetY = 95;
-var canvasWidth = 800;
+var canvasWidth = 900;
 var canvasHeight = 500;
 var paper = new Raphael(document.getElementById('canvas_container'), canvasWidth, canvasHeight);
 document.getElementById('canvas_container').style.width = canvasWidth+'px';
@@ -101,7 +101,7 @@ var dotAttr = {
     'fill': '#cccccc',
     'stroke': '#992244'
 };
-var dotOn  = {'stroke-width': '3', 'fill': 'white' };
+var dotOn  = {'stroke-width': '3', 'fill': '#924' };
 
 
 

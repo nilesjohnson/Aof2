@@ -4,82 +4,7 @@
 <head>
 <title>A(2) Demo Page</title>
 
-<style type="text/css">
-body {
-margin: 5px;
-padding: 5px;
-font-family: sans-serif;
-}
-#title {
-height: 50px;
-margin: 20px 0;
-}
-#canvas_container {  
-width: 700px;  
-border: 1px solid #aaa;
-float: left;
-}
-
-.instructions {
-float: left;
-width: 250px;
-clear: right;
-margin: 10px;
-}
-
-.info p {
-display: none;
-margin: 15px;
-padding: 0px;
-width: 150px;
-}
-
-.options {
-position: absolute;
-top: 80px;
-left:350px;
-}
-
-.options li a {
-text-decoration: none;
-color: #000;
-display: block;
-border: 1px solid #888;
-margin: 0px;
-padding: 2px;
-}
-
-.options li a:hover {
-border-color: #000;
-}
-.options li.selected {
-background-color: #caa;
-}
-<!--
-#option-sq1.selected {
-background-color: #2fbfbf;
-}
-#option-sq2.selected {
-background-color: #77bf2f;
-}
-#option-sq4.selected {
-background-color: #772fbf;
-}
--->
-
-.options li {
-list-style-type: none;
-margin-bottom: 3px;
-}
-.options ul {
-padding-left: 5px;
-}
-.options > ul > li {
-float:left;
-margin: 10px;
-}
-</style>
-
+<link rel="stylesheet" href="./css/style.css" />
 
 <!--
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
@@ -100,6 +25,29 @@ $( "#menu" ).menu();
 
 
 <div id="canvas_container"></div>
+
+<div class="options">
+  <ul>
+    <li><a href="#" onclick="clearAll(); return false;">Clear all</a></li>
+    <li>Basis type
+      <ul>  
+	<li class="selected" id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;">Adem</a></li>
+	<li id="option-milnor"><a href="#" onclick="setBasisType('milnor'); return false;">Milnor</a></li>
+	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;">none</a></li>
+      </ul>
+    </li>
+    <li>Operation
+      <ul>
+	<li class="selected" id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;">\(Sq^1\)</a></li>
+	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;">\(Sq^2\)</a></li>
+	<li id="option-sq4"><a href="#" onclick="toggleOperation('sq4'); return false;">\(Sq^4\)</a></li>
+	<li id="option-full-submod"><a href="#" onclick="return false;">Full submodule</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
 
 
 <div id="element-info" class="info">
@@ -254,27 +202,6 @@ $( "#menu" ).menu();
   you click the buttons, but that will appear soon.</p>
 </div>
 
-<div class="options">
-  <ul>
-    <li><a href="#" onclick="clearAll(); return false;">Clear all</a></li>
-    <li>Basis type
-      <ul>  
-	<li class="selected" id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;">Adem</a></li>
-	<li id="option-milnor"><a href="#" onclick="setBasisType('milnor'); return false;">Milnor</a></li>
-	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;">none</a></li>
-      </ul>
-    </li>
-    <li>Operation
-      <ul>
-	<li class="selected" id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;">\(Sq^1\)</a></li>
-	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;">\(Sq^2\)</a></li>
-	<li id="option-sq4"><a href="#" onclick="toggleOperation('sq4'); return false;">\(Sq^4\)</a></li>
-	<li id="option-full-submod"><a href="#" onclick="return false;">Full submodule</a></li>
-      </ul>
-    </li>
-  </ul>
-</div>
-
 
 <p style="clear: both"><a href="http://raphaeljs.com/">Raphaël.js</a> is a javascript
 library for working with graphics in html.  Take a look at the
@@ -286,67 +213,18 @@ homepage for more sophisticated demos.</p>
   <li>balloon menu showing Adem/Milnor representation could be placed
   differently for different dots; for example it could have the pointer
   at the bottom, or on the right side</li>
-  <li>Set highlighted dots to be solid red</li>
   <li>Dynamically resize info balloon to fit basis info</li>
   <li>Write description and instructions</li>
 </ul>
+
 <h2>Done</h2>
 <ul style="text-decoration: line-through">
   <li>"None" option for basis type still doesn't work</li>
   <li>Clicking an option should update the current display
   immediately</li>
   <li>Re-work to use 2:1 aspect ratio (fix 'squareStep')</li>
-
+  <li>Set highlighted dots to be solid red</li>
 </ul>
-
-
-
-
-
-
-
-
-
-<!--
-<ul id="menu">
-  <li class="ui-state-disabled"><a href="#">Aberdeen</a></li>
-  <li><a href="#">Ada</a></li>
-  <li><a href="#">Adamsville</a></li>
-  <li><a href="#">Addyston</a></li>
-  <li>
-    <a href="#">Delphi</a>
-    <ul>
-      <li class="ui-state-disabled"><a href="#">Ada</a></li>
-      <li><a href="#">Saarland</a></li>
-      <li><a href="#">Salzburg</a></li>
-    </ul>
-  </li>
-  <li><a href="#">Saarland</a></li>
-  <li>
-    <a href="#">Salzburg</a>
-    <ul>
-      <li>
-        <a href="#">Delphi</a>
-        <ul>
-          <li><a href="#">Ada</a></li>
-          <li><a href="#">Saarland</a></li>
-          <li><a href="#">Salzburg</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">Delphi</a>
-        <ul>
-          <li><a href="#">Ada</a></li>
-          <li><a href="#">Saarland</a></li>
-          <li><a href="#">Salzburg</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Perch</a></li>
-    </ul>
-  </li>
-  <li class="ui-state-disabled"><a href="#">Amesville</a></li>
-</ul>
---> 
 
 </body>
 
