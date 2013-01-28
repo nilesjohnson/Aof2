@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<title>A(2) Demo Page</title>
+
+<style type="text/css">
+body {
+margin: 5px;
+padding: 5px;
+font-family: sans-serif;
+}
+#title {
+height: 50px;
+margin: 20px 0;
+}
+#canvas_container {  
+width: 700px;  
+border: 1px solid #aaa;
+float: left;
+}
+
+.instructions {
+float: left;
+width: 250px;
+clear: right;
+margin: 10px;
+}
+
+.info p {
+display: none;
+margin: 15px;
+padding: 0px;
+width: 150px;
+}
+
+.options {
+position: absolute;
+top: 80px;
+left:350px;
+}
+
+.options li a {
+text-decoration: none;
+color: #000;
+display: block;
+border: 1px solid #888;
+margin: 0px;
+padding: 2px;
+}
+
+.options li a:hover {
+border-color: #000;
+}
+.options li.selected {
+background-color: #caa;
+}
+<!--
+#option-sq1.selected {
+background-color: #2fbfbf;
+}
+#option-sq2.selected {
+background-color: #77bf2f;
+}
+#option-sq4.selected {
+background-color: #772fbf;
+}
+-->
+
+.options li {
+list-style-type: none;
+margin-bottom: 3px;
+}
+.options ul {
+padding-left: 5px;
+}
+.options > ul > li {
+float:left;
+margin: 10px;
+}
+</style>
+
+
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script>
+$(function() {
+$( "#menu" ).menu();
+});
+</script>
+-->
+
+</head>
+
+<body>
+
+<h1 id="title">Visualization of \(A(2)\)</h1>
+
+
+<div id="canvas_container"></div>
+
+<div id="element-info" class="info">
+
+<p id="dot-0-0-adem">\(Sq^a Sq^b\) adem info for dot 0-0</p>
+<p id="dot-0-0-milnor">\(Sq(a,b,c)\) milnor info for dot 0-0</p>
+<p id="dot-0-1-adem">\(Sq^a Sq^b\) adem info for dot 0-1</p>
+<p id="dot-0-1-milnor">\(Sq(a,b,c)\) milnor info for dot 0-1</p>
+<p id="dot-0-2-adem">\(Sq^a Sq^b\) adem info for dot 0-2</p>
+<p id="dot-0-2-milnor">\(Sq(a,b,c)\) milnor info for dot 0-2</p>
+<p id="dot-0-3-adem">\(Sq^a Sq^b\) adem info for dot 0-3</p>
+<p id="dot-0-3-milnor">\(Sq(a,b,c)\) milnor info for dot 0-3</p>
+<p id="dot-0-4-adem">\(Sq^a Sq^b\) adem info for dot 0-4</p>
+<p id="dot-0-4-milnor">\(Sq(a,b,c)\) milnor info for dot 0-4</p>
+<p id="dot-0-5-adem">\(Sq^a Sq^b\) adem info for dot 0-5</p>
+<p id="dot-0-5-milnor">\(Sq(a,b,c)\) milnor info for dot 0-5</p>
+<p id="dot-0-6-adem">\(Sq^a Sq^b\) adem info for dot 0-6</p>
+<p id="dot-0-6-milnor">\(Sq(a,b,c)\) milnor info for dot 0-6</p>
+<p id="dot-0-7-adem">\(Sq^a Sq^b\) adem info for dot 0-7</p>
+<p id="dot-0-7-milnor">\(Sq(a,b,c)\) milnor info for dot 0-7</p>
+<p id="dot-4-0-adem">\(Sq^a Sq^b\) adem info for dot 4-0</p>
+<p id="dot-4-0-milnor">\(Sq(a,b,c)\) milnor info for dot 4-0</p>
+<p id="dot-4-1-adem">\(Sq^a Sq^b\) adem info for dot 4-1</p>
+<p id="dot-4-1-milnor">\(Sq(a,b,c)\) milnor info for dot 4-1</p>
+<p id="dot-4-2-adem">\(Sq^a Sq^b\) adem info for dot 4-2</p>
+<p id="dot-4-2-milnor">\(Sq(a,b,c)\) milnor info for dot 4-2</p>
+<p id="dot-4-3-adem">\(Sq^a Sq^b\) adem info for dot 4-3</p>
+<p id="dot-4-3-milnor">\(Sq(a,b,c)\) milnor info for dot 4-3</p>
+<p id="dot-4-4-adem">\(Sq^a Sq^b\) adem info for dot 4-4</p>
+<p id="dot-4-4-milnor">\(Sq(a,b,c)\) milnor info for dot 4-4</p>
+<p id="dot-4-5-adem">\(Sq^a Sq^b\) adem info for dot 4-5</p>
+<p id="dot-4-5-milnor">\(Sq(a,b,c)\) milnor info for dot 4-5</p>
+<p id="dot-4-6-adem">\(Sq^a Sq^b\) adem info for dot 4-6</p>
+<p id="dot-4-6-milnor">\(Sq(a,b,c)\) milnor info for dot 4-6</p>
+<p id="dot-4-7-adem">\(Sq^a Sq^b\) adem info for dot 4-7</p>
+<p id="dot-4-7-milnor">\(Sq(a,b,c)\) milnor info for dot 4-7</p>
+<p id="dot-7-0-adem">\(Sq^a Sq^b\) adem info for dot 7-0</p>
+<p id="dot-7-0-milnor">\(Sq(a,b,c)\) milnor info for dot 7-0</p>
+<p id="dot-7-1-adem">\(Sq^a Sq^b\) adem info for dot 7-1</p>
+<p id="dot-7-1-milnor">\(Sq(a,b,c)\) milnor info for dot 7-1</p>
+<p id="dot-7-2-adem">\(Sq^a Sq^b\) adem info for dot 7-2</p>
+<p id="dot-7-2-milnor">\(Sq(a,b,c)\) milnor info for dot 7-2</p>
+<p id="dot-7-3-adem">\(Sq^a Sq^b\) adem info for dot 7-3</p>
+<p id="dot-7-3-milnor">\(Sq(a,b,c)\) milnor info for dot 7-3</p>
+<p id="dot-7-4-adem">\(Sq^a Sq^b\) adem info for dot 7-4</p>
+<p id="dot-7-4-milnor">\(Sq(a,b,c)\) milnor info for dot 7-4</p>
+<p id="dot-7-5-adem">\(Sq^a Sq^b\) adem info for dot 7-5</p>
+<p id="dot-7-5-milnor">\(Sq(a,b,c)\) milnor info for dot 7-5</p>
+<p id="dot-7-6-adem">\(Sq^a Sq^b\) adem info for dot 7-6</p>
+<p id="dot-7-6-milnor">\(Sq(a,b,c)\) milnor info for dot 7-6</p>
+<p id="dot-7-7-adem">\(Sq^a Sq^b\) adem info for dot 7-7</p>
+<p id="dot-7-7-milnor">\(Sq(a,b,c)\) milnor info for dot 7-7</p>
+<p id="dot-10-0-adem">\(Sq^a Sq^b\) adem info for dot 10-0</p>
+<p id="dot-10-0-milnor">\(Sq(a,b,c)\) milnor info for dot 10-0</p>
+<p id="dot-10-1-adem">\(Sq^a Sq^b\) adem info for dot 10-1</p>
+<p id="dot-10-1-milnor">\(Sq(a,b,c)\) milnor info for dot 10-1</p>
+<p id="dot-10-2-adem">\(Sq^a Sq^b\) adem info for dot 10-2</p>
+<p id="dot-10-2-milnor">\(Sq(a,b,c)\) milnor info for dot 10-2</p>
+<p id="dot-10-3-adem">\(Sq^a Sq^b\) adem info for dot 10-3</p>
+<p id="dot-10-3-milnor">\(Sq(a,b,c)\) milnor info for dot 10-3</p>
+<p id="dot-10-4-adem">\(Sq^a Sq^b\) adem info for dot 10-4</p>
+<p id="dot-10-4-milnor">\(Sq(a,b,c)\) milnor info for dot 10-4</p>
+<p id="dot-10-5-adem">\(Sq^a Sq^b\) adem info for dot 10-5</p>
+<p id="dot-10-5-milnor">\(Sq(a,b,c)\) milnor info for dot 10-5</p>
+<p id="dot-10-6-adem">\(Sq^a Sq^b\) adem info for dot 10-6</p>
+<p id="dot-10-6-milnor">\(Sq(a,b,c)\) milnor info for dot 10-6</p>
+<p id="dot-10-7-adem">\(Sq^a Sq^b\) adem info for dot 10-7</p>
+<p id="dot-10-7-milnor">\(Sq(a,b,c)\) milnor info for dot 10-7</p>
+<p id="dot-14-0-adem">\(Sq^a Sq^b\) adem info for dot 14-0</p>
+<p id="dot-14-0-milnor">\(Sq(a,b,c)\) milnor info for dot 14-0</p>
+<p id="dot-14-1-adem">\(Sq^a Sq^b\) adem info for dot 14-1</p>
+<p id="dot-14-1-milnor">\(Sq(a,b,c)\) milnor info for dot 14-1</p>
+<p id="dot-14-2-adem">\(Sq^a Sq^b\) adem info for dot 14-2</p>
+<p id="dot-14-2-milnor">\(Sq(a,b,c)\) milnor info for dot 14-2</p>
+<p id="dot-14-3-adem">\(Sq^a Sq^b\) adem info for dot 14-3</p>
+<p id="dot-14-3-milnor">\(Sq(a,b,c)\) milnor info for dot 14-3</p>
+<p id="dot-14-4-adem">\(Sq^a Sq^b\) adem info for dot 14-4</p>
+<p id="dot-14-4-milnor">\(Sq(a,b,c)\) milnor info for dot 14-4</p>
+<p id="dot-14-5-adem">\(Sq^a Sq^b\) adem info for dot 14-5</p>
+<p id="dot-14-5-milnor">\(Sq(a,b,c)\) milnor info for dot 14-5</p>
+<p id="dot-14-6-adem">\(Sq^a Sq^b\) adem info for dot 14-6</p>
+<p id="dot-14-6-milnor">\(Sq(a,b,c)\) milnor info for dot 14-6</p>
+<p id="dot-14-7-adem">\(Sq^a Sq^b\) adem info for dot 14-7</p>
+<p id="dot-14-7-milnor">\(Sq(a,b,c)\) milnor info for dot 14-7</p>
+<p id="dot-17-0-adem">\(Sq^a Sq^b\) adem info for dot 17-0</p>
+<p id="dot-17-0-milnor">\(Sq(a,b,c)\) milnor info for dot 17-0</p>
+<p id="dot-17-1-adem">\(Sq^a Sq^b\) adem info for dot 17-1</p>
+<p id="dot-17-1-milnor">\(Sq(a,b,c)\) milnor info for dot 17-1</p>
+<p id="dot-17-2-adem">\(Sq^a Sq^b\) adem info for dot 17-2</p>
+<p id="dot-17-2-milnor">\(Sq(a,b,c)\) milnor info for dot 17-2</p>
+<p id="dot-17-3-adem">\(Sq^a Sq^b\) adem info for dot 17-3</p>
+<p id="dot-17-3-milnor">\(Sq(a,b,c)\) milnor info for dot 17-3</p>
+<p id="dot-17-4-adem">\(Sq^a Sq^b\) adem info for dot 17-4</p>
+<p id="dot-17-4-milnor">\(Sq(a,b,c)\) milnor info for dot 17-4</p>
+<p id="dot-17-5-adem">\(Sq^a Sq^b\) adem info for dot 17-5</p>
+<p id="dot-17-5-milnor">\(Sq(a,b,c)\) milnor info for dot 17-5</p>
+<p id="dot-17-6-adem">\(Sq^a Sq^b\) adem info for dot 17-6</p>
+<p id="dot-17-6-milnor">\(Sq(a,b,c)\) milnor info for dot 17-6</p>
+<p id="dot-17-7-adem">\(Sq^a Sq^b\) adem info for dot 17-7</p>
+<p id="dot-17-7-milnor">\(Sq(a,b,c)\) milnor info for dot 17-7</p>
+<p id="dot-20-0-adem">\(Sq^a Sq^b\) adem info for dot 20-0</p>
+<p id="dot-20-0-milnor">\(Sq(a,b,c)\) milnor info for dot 20-0</p>
+<p id="dot-20-1-adem">\(Sq^a Sq^b\) adem info for dot 20-1</p>
+<p id="dot-20-1-milnor">\(Sq(a,b,c)\) milnor info for dot 20-1</p>
+<p id="dot-20-2-adem">\(Sq^a Sq^b\) adem info for dot 20-2</p>
+<p id="dot-20-2-milnor">\(Sq(a,b,c)\) milnor info for dot 20-2</p>
+<p id="dot-20-3-adem">\(Sq^a Sq^b\) adem info for dot 20-3</p>
+<p id="dot-20-3-milnor">\(Sq(a,b,c)\) milnor info for dot 20-3</p>
+<p id="dot-20-4-adem">\(Sq^a Sq^b\) adem info for dot 20-4</p>
+<p id="dot-20-4-milnor">\(Sq(a,b,c)\) milnor info for dot 20-4</p>
+<p id="dot-20-5-adem">\(Sq^a Sq^b\) adem info for dot 20-5</p>
+<p id="dot-20-5-milnor">\(Sq(a,b,c)\) milnor info for dot 20-5</p>
+<p id="dot-20-6-adem">\(Sq^a Sq^b\) adem info for dot 20-6</p>
+<p id="dot-20-6-milnor">\(Sq(a,b,c)\) milnor info for dot 20-6</p>
+<p id="dot-20-7-adem">\(Sq^a Sq^b\) adem info for dot 20-7</p>
+<p id="dot-20-7-milnor">\(Sq(a,b,c)\) milnor info for dot 20-7</p>
+<p id="dot-24-0-adem">\(Sq^a Sq^b\) adem info for dot 24-0</p>
+<p id="dot-24-0-milnor">\(Sq(a,b,c)\) milnor info for dot 24-0</p>
+<p id="dot-24-1-adem">\(Sq^a Sq^b\) adem info for dot 24-1</p>
+<p id="dot-24-1-milnor">\(Sq(a,b,c)\) milnor info for dot 24-1</p>
+<p id="dot-24-2-adem">\(Sq^a Sq^b\) adem info for dot 24-2</p>
+<p id="dot-24-2-milnor">\(Sq(a,b,c)\) milnor info for dot 24-2</p>
+<p id="dot-24-3-adem">\(Sq^a Sq^b\) adem info for dot 24-3</p>
+<p id="dot-24-3-milnor">\(Sq(a,b,c)\) milnor info for dot 24-3</p>
+<p id="dot-24-4-adem">\(Sq^a Sq^b\) adem info for dot 24-4</p>
+<p id="dot-24-4-milnor">\(Sq(a,b,c)\) milnor info for dot 24-4</p>
+<p id="dot-24-5-adem">\(Sq^a Sq^b\) adem info for dot 24-5</p>
+<p id="dot-24-5-milnor">\(Sq(a,b,c)\) milnor info for dot 24-5</p>
+<p id="dot-24-6-adem">\(Sq^a Sq^b\) adem info for dot 24-6</p>
+<p id="dot-24-6-milnor">\(Sq(a,b,c)\) milnor info for dot 24-6</p>
+<p id="dot-24-7-adem">\(Sq^a Sq^b\) adem info for dot 24-7</p>
+<p id="dot-24-7-milnor">\(Sq(a,b,c)\) milnor info for dot 24-7</p>
+
+</div>
+
+
+
+
+<div class="instructions">
+  <h2>Instructions</h2>
+  <p>Clicking each dot shows a menu.  Click "Adem" or "Milnor" to
+  change the info displayed in the box.  Note that it now takes a
+  noticeable amount of time for mathjax to render everything on the
+  page...if this becomes too annoying, we may have to deal with
+  it.</p>
+  
+  <p>Clicking away from a dot now clears the menu!</p>
+
+  <p>Click the different \(Sq^n\) to toggle display of that
+  information.  Currently the drawing is not updated immediately when
+  you click the buttons, but that will appear soon.</p>
+</div>
+
+<div class="options">
+  <ul>
+    <li><a href="#" onclick="clearAll(); return false;">Clear all</a></li>
+    <li>Basis type
+      <ul>  
+	<li class="selected" id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;">Adem</a></li>
+	<li id="option-milnor"><a href="#" onclick="setBasisType('milnor'); return false;">Milnor</a></li>
+	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;">none</a></li>
+      </ul>
+    </li>
+    <li>Operation
+      <ul>
+	<li class="selected" id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;">\(Sq^1\)</a></li>
+	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;">\(Sq^2\)</a></li>
+	<li id="option-sq4"><a href="#" onclick="toggleOperation('sq4'); return false;">\(Sq^4\)</a></li>
+	<li id="option-full-submod"><a href="#" onclick="return false;">Full submodule</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+<p style="clear: both"><a href="http://raphaeljs.com/">Raphaël.js</a> is a javascript
+library for working with graphics in html.  Take a look at the
+homepage for more sophisticated demos.</p>
+
+<h2>Interface Issues TODO</h2>
+<ul>
+<li style="text-decoration: line-through">"None" option for basis type still doesn't work</li>
+<li>"Submodule" option doesn't work</li>
+<li>balloon menu showing Adem/Milnor representation could be placed
+differently for different dots; for example it could have the pointer
+at the bottom, or on the right side</li>
+<li style="text-decoration: line-through">Clicking an option should update the current display immediately</li>
+</ul>
+
+
+
+
+
+
+
+
+<!--
+<ul id="menu">
+  <li class="ui-state-disabled"><a href="#">Aberdeen</a></li>
+  <li><a href="#">Ada</a></li>
+  <li><a href="#">Adamsville</a></li>
+  <li><a href="#">Addyston</a></li>
+  <li>
+    <a href="#">Delphi</a>
+    <ul>
+      <li class="ui-state-disabled"><a href="#">Ada</a></li>
+      <li><a href="#">Saarland</a></li>
+      <li><a href="#">Salzburg</a></li>
+    </ul>
+  </li>
+  <li><a href="#">Saarland</a></li>
+  <li>
+    <a href="#">Salzburg</a>
+    <ul>
+      <li>
+        <a href="#">Delphi</a>
+        <ul>
+          <li><a href="#">Ada</a></li>
+          <li><a href="#">Saarland</a></li>
+          <li><a href="#">Salzburg</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Delphi</a>
+        <ul>
+          <li><a href="#">Ada</a></li>
+          <li><a href="#">Saarland</a></li>
+          <li><a href="#">Salzburg</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Perch</a></li>
+    </ul>
+  </li>
+  <li class="ui-state-disabled"><a href="#">Amesville</a></li>
+</ul>
+--> 
+
+</body>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script type="text/javascript" src="../js/raphael-min.js"></script>  
+<script type="text/javascript" src="../js/A2.js"></script> 
+
+</html>
