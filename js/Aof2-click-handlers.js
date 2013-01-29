@@ -113,11 +113,25 @@ var drawMenu = function(dotId) {
     var posY = dot[dotId].data('position')[1]
     var pointerOffsetX = dotWidth;
     var pointerOffsetY = dotWidth;
-    var menuWidth = 150;
-    var itemHeight = 25;
-    var menuHeight = 70;//itemHeight*numItems;
     var menuOffsetX = 4*dotWidth; //these could be pulled from an array
     var menuOffsetY = 2*dotWidth;
+
+    // get basis info from HTML element for dot
+    info = basisElement(dotId,basisType);
+    if (info !== null) {
+	info.style.display = "block";
+	info.style.position = "absolute";
+	info.style.left = (posX+canvasOffsetX+menuOffsetX+pointerOffsetX+2*dotWidth)+'px';
+	info.style.top = (posY+canvasOffsetY-menuOffsetY+pointerOffsetY)+'px';
+	info.style.zIndex = 1;
+	var infoWidth = info.offsetWidth;
+	var infoHeight = info.offsetHeight;
+	document.getElementById('widthheight').innerHTML = infoWidth + 'x'+infoHeight;
+    }
+
+    var menuWidth = info.offsetWidth + 2*menuOffsetX;
+    //var itemHeight = 25;
+    var menuHeight = info.offsetHeight + 2*menuOffsetY;
     var h2 = menuHeight - 2*dotWidth;
     var menuPath = "M " + (posX+pointerOffsetX) + " " + (posY-pointerOffsetY) + " ";
     var menuPath = menuPath.concat("l " + menuOffsetX + " -" + menuOffsetY + " ");
@@ -150,16 +164,7 @@ var drawMenu = function(dotId) {
     }
     */
     menuSet.toFront();
-    if (basisType == 'adem' || basisType == 'milnor') {
-	info = basisElement(dotId,basisType);
-	if (info !== null) {
-	    info.style.display = "block";
-	    info.style.position = "absolute";
-	    info.style.left = (posX+canvasOffsetX+menuOffsetX)+'px';
-	    info.style.top = (posY+canvasOffsetY-menuOffsetY)+'px';
-	    info.style.zIndex = 1;
-	}
-    }
+    dot[dotId].toFront();
     return menuSet;
 };
 

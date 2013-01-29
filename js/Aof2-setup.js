@@ -76,8 +76,9 @@ var menuItemAttr = {
 
 var menuAttr = {
     'fill': '#9cf', 
-    'stroke': '#ddd',
-    'stroke-width': 2,
+    'stroke': '#9cf',
+    'stroke-width': '8',
+    'stroke-linejoin': 'round',
     'opacity': '.8'
 };
 
@@ -90,8 +91,8 @@ var menuAttr = {
 // offset of canvas
 var canvasOffsetX = 5;
 var canvasOffsetY = 95;
-var canvasWidth = 900;
-var canvasHeight = 500;
+var canvasWidth = 1000;
+var canvasHeight = 550;
 
 // paper
 var paper = new Raphael(document.getElementById('canvas_container'), canvasWidth, canvasHeight);
