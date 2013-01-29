@@ -2,6 +2,8 @@ body {
 margin: 5px;
 padding: 5px;
 font-family: sans-serif;
+line-height: 150%;
+
 }
 #title {
 height: 50px;
@@ -25,6 +27,7 @@ display: none;
 margin: 15px;
 padding: 0px;
 width: 150px;
+line-height: 150%;
 }
 
 .options {
