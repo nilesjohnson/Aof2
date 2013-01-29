@@ -1,5 +1,7 @@
-
-// helper functions
+/*
+  helper functions
+  Version 0.3
+*/
 
 var basisElement = function(id,basisType) {
     // given input id, return html element storing milnor basis for dot i

@@ -1,7 +1,7 @@
 /*
-Functions for handling clicks
-
-Version 0.3
+  Functions for handling clicks
+  
+  Version 0.3
 */
 
 
@@ -9,6 +9,8 @@ Version 0.3
 
 
 var toggleOperation = function(str) {
+    // Toggle to display or not display which 
+    // of the Sq^i operations to show
     operationType[str] = !operationType[str];
     if (operationType[str]) {
 	document.getElementById('option-'+str).style.backgroundColor = operationColor[str];
@@ -26,10 +28,13 @@ var toggleOperation = function(str) {
 
 
 var clickHandler = function() {
-    /*
-      this function will be called with 'this' referring to the dot
-      element that was clicked on
-    */
+    // Handle click on dots
+    // Clear previous display, 
+    // show operations,
+    // draw balloon menu
+    //
+    // 'this' refers to the dot that
+    // was clicked
     clearAll();
     this.animate( dotOn, 150 ).data('selected', 1 );
     showOperations(this.data('id'));

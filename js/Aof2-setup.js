@@ -1,7 +1,7 @@
 /*
-Setup of the interface
-
-Version 0.3
+  Setup of the interface
+  
+  Version 0.3
 */
 
 
