@@ -10,15 +10,15 @@ body {
     margin: 20px 0;
 }
 
-#canvas_container {  
+#canvas_container, #instructions {  
     width: 900px;  
+}
+#canvas_container {
     border: 0px solid #aaa;
     float: left;
 }
-
 #instructions {
     margin: 10px;
-    height: 120px;
 }
 
 .info p {
@@ -33,7 +33,6 @@ body {
 .options {
     position: absolute;
     left: 536px;
-    top: 226px;
     width: 339px;
 }
 
