@@ -22,8 +22,6 @@ var toggleOperation = function(str) {
 	showOperations(menu['id']);
 	menu = drawMenu(menu['id']);
     }
-
-
 }
 
 
@@ -106,6 +104,9 @@ function drawMenu(dotId) {
       draw menu with pointer at given position      
     */
     //numItems = itemLabel.length
+    if (dotId == undefined) {
+	return false;
+    }
     if (basisType == "none") {
 	return {'id': dotId};
     }
@@ -150,6 +151,7 @@ function drawMenu(dotId) {
     var menuHeight = info.offsetHeight + 2*menuOffsetY;
     var h2 = menuHeight - 3*dotWidth;
     
+    // reposition to lay on top of menu
     info.style.left = (posX + 
 		       canvasOffsetX +
 		       menuSide*menuOffsetX +
@@ -160,8 +162,8 @@ function drawMenu(dotId) {
 		      canvasOffsetY + 
 		      1*menuDir*menuOffsetY + 
 		      1*menuDir*pointerOffsetY + 
-		      (.85*(menuDir-1)/2)*menuHeight+
-		      (.15*(menuDir+1)/2)*menuHeight) + 'px';
+		      (1*(menuDir-1)/2)*menuHeight+
+		      (0*(menuDir+1)/2)*menuHeight) + 'px';
     info.style.zIndex = 1;
 
     // build path for menu

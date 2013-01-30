@@ -6,11 +6,12 @@
 
 
 // global options for basis type and operation type
-var basisType = 'adem';
-var showSqOne = true;
-var showSqTwo = false;
-var showSqFour = false;
-var operationType = {'sq1': true,
+var basisType; // default set at bottom of this file
+
+//var showSqOne = false; 
+//var showSqTwo = false;
+//var showSqFour = false;
+var operationType = {'sq1': false, // toggled at bottom of this file
 		     'sq2': false,
 		     'sq4': false};
 var operationData = {'sq1': {},  // fake data generated at end of file
@@ -87,8 +88,8 @@ var menuAttr = {
 // Setup canvas
 
 // offset of canvas from document body (0,0)
-var canvasOffsetX = 5;
-var canvasOffsetY = 95;
+var canvasOffsetX = document.getElementById('canvas_container').offsetLeft;
+var canvasOffsetY = document.getElementById('canvas_container').offsetTop;
 
 var canvasWidth = 900;
 var canvasHeight = 550;
@@ -108,7 +109,7 @@ document.getElementById('canvas_container').style.height = canvasHeight+'px';
 
 
 var dot = {};
-currentDotId = false;
+//currentDotId = false;
 var menu = false;
 //var info = [];
 //var menuList = [];
@@ -296,5 +297,8 @@ for (var i = 0; i < aOfOneOffset.length; i++) {
     }
 }
 
+
+setBasisType('adem');
+toggleOperation('sq1');
 
 document.body.addEventListener('click',clearMenu,true);

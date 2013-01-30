@@ -23,7 +23,17 @@ $( "#menu" ).menu();
 
 <h1 id="title">Visualization of \(A(2)\)</h1>
 
+<div id="instructions">
+  <h2>Instructions</h2>
+  <p>Clicking each dot shows a menu.  Click "Adem" or "Milnor" to
+  change the info displayed in the box.</p>
 
+  <p>Click the different \(Sq^i\) to toggle display of that
+  information.</p>
+</div>
+
+
+<div id="app_container">
 <div id="canvas_container"></div>
 
 <div class="options">
@@ -31,14 +41,14 @@ $( "#menu" ).menu();
     <li><a href="#" onclick="clearAll(); return false;">Clear all</a></li>
     <li>Basis type
       <ul>  
-	<li class="selected" id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;">Adem</a></li>
+	<li id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;">Adem</a></li>
 	<li id="option-milnor"><a href="#" onclick="setBasisType('milnor'); return false;">Milnor</a></li>
 	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;">none</a></li>
       </ul>
     </li>
     <li>Operation
       <ul>
-	<li class="selected" id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;">\(Sq^1\)</a></li>
+	<li id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;">\(Sq^1\)</a></li>
 	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;">\(Sq^2\)</a></li>
 	<li id="option-sq4"><a href="#" onclick="toggleOperation('sq4'); return false;">\(Sq^4\)</a></li>
 	<li id="option-full-submod"><a href="#" onclick="return false;">Full submodule</a></li>
@@ -46,7 +56,7 @@ $( "#menu" ).menu();
     </li>
   </ul>
 </div>
-
+</div>
 
 
 
@@ -631,20 +641,6 @@ Sq(7,3,1)
 </div>
 
 
-<div class="instructions">
-  <h2>Instructions</h2>
-  <p>Clicking each dot shows a menu.  Click "Adem" or "Milnor" to
-  change the info displayed in the box.  Note that it now takes a
-  noticeable amount of time for mathjax to render everything on the
-  page...if this becomes too annoying, we may have to deal with
-  it.</p>
-  
-  <p>Clicking away from a dot now clears the menu!</p>
-
-  <p>Click the different \(Sq^n\) to toggle display of that
-  information.  Currently the drawing is not updated immediately when
-  you click the buttons, but that will appear soon.</p>
-</div>
 
 
 <p style="clear: both"><a href="http://raphaeljs.com/">Raphaël.js</a> is a javascript
@@ -656,6 +652,7 @@ homepage for more sophisticated demos.</p>
 <ul>
   <li>draw balloon menus on different sides, different directions for
   different dots</li>
+  <li>improve positioning of canvas, options, and basis display</li>
 </ul>
 
 <h2>TODO</h2>
@@ -664,6 +661,7 @@ homepage for more sophisticated demos.</p>
   <li>Write description and instructions</li>
   <li>Add \(Sq^i\) data</li>
   <li>Add Sage source code</li>
+  <li>Milnor basis sometimes falls outside of balloon</li>
 </ul>
 
 <h2>Done</h2>

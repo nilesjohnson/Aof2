@@ -1,77 +1,77 @@
 body {
-margin: 5px;
-padding: 5px;
-font-family: sans-serif;
-line-height: 150%;
-
+    margin: 5px;
+    padding: 5px;
+    font-family: sans-serif;
+    line-height: 150%;
+    
 }
 #title {
-height: 50px;
-margin: 20px 0;
-}
-#canvas_container {  
-width: 900px;  
-border: 1px solid #aaa;
-float: left;
+    height: 50px;
+    margin: 20px 0;
 }
 
-.instructions {
-float: left;
-width: 250px;
-clear: right;
-margin: 10px;
+#canvas_container {  
+    width: 900px;  
+    border: 0px solid #aaa;
+    float: left;
+}
+
+#instructions {
+    margin: 10px;
+    height: 120px;
 }
 
 .info p {
-display: none;
-margin: 5px;
-padding: 0px;
-width: auto;
-max-width: 200px;
-line-height: 150%;
+    display: none;
+    margin: 5px;
+    padding: 0px;
+    width: auto;
+    max-width: 250px;
+    line-height: 150%;
 }
 
 .options {
-position: absolute;
-top: 90px;
-left: 565px;
+    position: absolute;
+    left: 536px;
+    top: 226px;
+    width: 339px;
 }
 
 .options li a {
-text-decoration: none;
-color: #000;
-display: block;
-border: 1px solid #888;
-margin: 0px;
-padding: 2px;
+    text-decoration: none;
+    color: #000;
+    display: block;
+    border: 1px solid #888;
+    margin: 0px;
+    padding: 2px;
 }
 
 .options li a:hover {
-border-color: #000;
+    border-color: #000;
 }
 .options li.selected {
-background-color: #caa;
+    background-color: #caa;
 }
 <!--
 #option-sq1.selected {
-background-color: #2fbfbf;
+    background-color: #2fbfbf;
 }
 #option-sq2.selected {
-background-color: #77bf2f;
+    background-color: #77bf2f;
 }
 #option-sq4.selected {
-background-color: #772fbf;
+    background-color: #772fbf;
 }
 -->
 
 .options li {
-list-style-type: none;
-margin-bottom: 3px;
+    list-style-type: none;
+    margin-bottom: 3px;
 }
 .options ul {
-padding-left: 5px;
+    padding-left: 5px;
 }
 .options > ul > li {
-float:left;
-margin: 10px;
+    float:left;
+    margin: 10px;
 }
