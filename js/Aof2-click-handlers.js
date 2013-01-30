@@ -101,7 +101,7 @@ itemHandler = [basisMenuHandler,
 	       operationMenuHandler];
 */
 
-var drawMenu = function(dotId) {
+function drawMenu(dotId) {
     /*
       draw menu with pointer at given position      
     */
@@ -116,9 +116,29 @@ var drawMenu = function(dotId) {
     var menuOffsetX = 4*dotWidth; //these could be pulled from an array
     var menuOffsetY = 2*dotWidth;
     // putting menu on different sides and in different direction
-    var menuSide = -1; // +1 means right, -1 means left
-    var menuDir = 1; // +1 means down, -1 means up
-
+    if (dotId.match(/^\d+/) == aOfOneOffset[0][0]) {
+	// first A(1)
+	var menuSide = 1; // +1 means right, -1 means left
+	var menuDir = -1; // +1 means down, -1 means up
+    }
+    else if (dotId.match(/^\d+/) == aOfOneOffset[aOfOneOffset.length-1][0]) {
+	// last A(1)
+	var menuSide = -1; // +1 means right, -1 means left
+	var menuDir = -1; // +1 means down, -1 means up
+    }
+    else {
+	if (dotId.match(/\d+$/) < 3 || dotId.match(/\d+$/) == 4) {
+	    // top right half of A(1)
+	    var menuSide = 1; // +1 means right, -1 means left
+	    var menuDir = -1; // +1 means down, -1 means up
+	}
+	else {
+	    // bottom left half of A(1)
+	    var menuSide = -1; // +1 means right, -1 means left
+	    var menuDir = 1; // +1 means down, -1 means up
+	}
+    }
+	
     // get basis info from HTML element for dot
     info = basisElement(dotId,basisType);
     info.style.display = "block";
@@ -143,11 +163,6 @@ var drawMenu = function(dotId) {
 		      (.85*(menuDir-1)/2)*menuHeight+
 		      (.15*(menuDir+1)/2)*menuHeight) + 'px';
     info.style.zIndex = 1;
-
-    // temporary, for debugging
-    var infoWidth = info.offsetWidth;
-    var infoHeight = info.offsetHeight;
-    document.getElementById('widthheight').innerHTML = infoWidth + 'x'+infoHeight;
 
     // build path for menu
     var menuPath = 'M ' + posX + ' ' + posY + ' ';

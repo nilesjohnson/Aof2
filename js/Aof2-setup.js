@@ -51,8 +51,6 @@ var dotAttr = {
 };
 var dotOn  = {'stroke-width': '3', 'fill': '#924' };
 
-
-
 var dotWidth = 4;
 
 var pathBottomAttr = {
@@ -88,11 +86,16 @@ var menuAttr = {
 
 // Setup canvas
 
-// offset of canvas
+// offset of canvas from document body (0,0)
 var canvasOffsetX = 5;
 var canvasOffsetY = 95;
-var canvasWidth = 1000;
+
+var canvasWidth = 900;
 var canvasHeight = 550;
+
+// start position of A(2) on canvas
+var aOfTwoStartX = 100;
+var aOfTwoStartY = 60;
 
 // paper
 var paper = new Raphael(document.getElementById('canvas_container'), canvasWidth, canvasHeight);
@@ -187,7 +190,7 @@ aOfOneOffset = [[0,0], // made aspect ratio 2 to 1, so vertical position equals
 for (var i=0; i < aOfOneOffset.length; i++) {
     x = aOfOneOffset[i][0];
     y = aOfOneOffset[i][1];
-    aOfOne(2*gridSize+x*gridSize,25 + y*gridSize,x);
+    aOfOne(aOfTwoStartX+x*gridSize, aOfTwoStartY + y*gridSize,x);
 };
 
 // connect copies of A(1)
