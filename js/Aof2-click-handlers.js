@@ -111,36 +111,59 @@ var drawMenu = function(dotId) {
     }
     var posX = dot[dotId].data('position')[0]
     var posY = dot[dotId].data('position')[1]
-    var pointerOffsetX = dotWidth;
-    var pointerOffsetY = dotWidth;
+    var pointerOffsetX = 0*dotWidth;
+    var pointerOffsetY = 0*dotWidth;
     var menuOffsetX = 4*dotWidth; //these could be pulled from an array
     var menuOffsetY = 2*dotWidth;
+    // putting menu on different sides and in different direction
+    var menuSide = -1; // +1 means right, -1 means left
+    var menuDir = 1; // +1 means down, -1 means up
 
     // get basis info from HTML element for dot
     info = basisElement(dotId,basisType);
-    if (info !== null) {
-	info.style.display = "block";
-	info.style.position = "absolute";
-	info.style.left = (posX+canvasOffsetX+menuOffsetX+pointerOffsetX+2*dotWidth)+'px';
-	info.style.top = (posY+canvasOffsetY-menuOffsetY+pointerOffsetY)+'px';
-	info.style.zIndex = 1;
-	var infoWidth = info.offsetWidth;
-	var infoHeight = info.offsetHeight;
-	document.getElementById('widthheight').innerHTML = infoWidth + 'x'+infoHeight;
-    }
+    info.style.display = "block";
+    info.style.position = "absolute";
 
+    // 
     var menuWidth = info.offsetWidth + 2*menuOffsetX;
     //var itemHeight = 25;
     var menuHeight = info.offsetHeight + 2*menuOffsetY;
-    var h2 = menuHeight - 2*dotWidth;
-    var menuPath = "M " + (posX+pointerOffsetX) + " " + (posY-pointerOffsetY) + " ";
-    var menuPath = menuPath.concat("l " + menuOffsetX + " -" + menuOffsetY + " ");
-    var menuPath = menuPath.concat("l " + menuWidth + " 0 ");
-    var menuPath = menuPath.concat("l 0 " + menuHeight + " ");
-    var menuPath = menuPath.concat("l -" + menuWidth + " 0 ");
-    var menuPath = menuPath.concat("l 0 -" + h2 + " z");
+    var h2 = menuHeight - 3*dotWidth;
+    
+    info.style.left = (posX + 
+		       canvasOffsetX +
+		       menuSide*menuOffsetX +
+		       menuSide*pointerOffsetX +
+		       1*2*dotWidth +
+		       ((menuSide-1)/2)*menuWidth)+'px';
+    info.style.top = (posY + 
+		      canvasOffsetY + 
+		      1*menuDir*menuOffsetY + 
+		      1*menuDir*pointerOffsetY + 
+		      (.85*(menuDir-1)/2)*menuHeight+
+		      (.15*(menuDir+1)/2)*menuHeight) + 'px';
+    info.style.zIndex = 1;
+
+    // temporary, for debugging
+    var infoWidth = info.offsetWidth;
+    var infoHeight = info.offsetHeight;
+    document.getElementById('widthheight').innerHTML = infoWidth + 'x'+infoHeight;
+
+    // build path for menu
+    var menuPath = 'M ' + posX + ' ' + posY + ' ';
+    menuPath = menuPath.concat("m " + (menuSide*pointerOffsetX) +
+			       " " + (-1*menuDir*pointerOffsetY) + " ");
+    menuPath = menuPath.concat("l " + (menuSide*menuOffsetX) + 
+			       " " + (menuDir*menuOffsetY) + " ");
+    menuPath = menuPath.concat("l " + (menuSide*menuWidth) + " 0 ");
+    menuPath = menuPath.concat("l 0 " + (menuDir*menuHeight) + " ");
+    menuPath = menuPath.concat("l " + (-1*menuSide*menuWidth) + " 0 ");
+    menuPath = menuPath.concat("l 0 " + (-1*menuDir*h2) + " z");
+
+
     var menuSet = paper.set();
     menuSet['id'] = dotId;
+
     var menuContainer = paper.path(menuPath);
     menuContainer.data('id', dotId);
     menuSet.push(menuContainer)
