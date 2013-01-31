@@ -33,7 +33,7 @@ body {
 .options {
     position: absolute;
     left: 536px;
-    width: 339px;
+    width: 380px;
 }
 
 .options li a {
@@ -42,7 +42,7 @@ body {
     display: block;
     border: 1px solid #888;
     margin: 0px;
-    padding: 2px;
+    padding: 5px 10px;
 }
 
 .options li a:hover {
