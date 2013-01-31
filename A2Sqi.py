@@ -25,6 +25,8 @@ RH = [
 
 pairs = reduce(lambda x,y: x+y, [[[i,j] for j in range(8)] for i in range(8)])
 
+#pairs == [[i,j] for i in range(8) for j in range(8)]  # True
+
 displayBasis = [filter(lambda x: n == (LH[x[0]].degree() + RH[x[1]].degree()), pairs)
                  for n in range(24)]
 
@@ -86,3 +88,31 @@ for i in range(8):
 	    Sq4[i][j] = [displayBasis[4+n][s] for s in w.support()]
 
 
+aOfOneOffset = [[0,0], 
+		[8,4], 
+		[12,6], 
+		[14,7],
+		[20,10],
+		[22,11],
+		[26,13],
+		[34,17]]
+
+def print_sqi_for_js():
+      """
+      Function to output Sq^i data as dict for js functions
+      """
+      operationData = {}
+      for n in [1,2,4]:
+            operationData['sq'+str(n)] = {}
+            for i in range(8):
+                  for j in range(8):
+                        dot_id = "{0}-{1}".format(aOfOneOffset[i][0],j)
+                        operationData['sq'+str(n)][dot_id] = []
+                        x = Sq(n)*LH[i]*RH[j]
+                        if x != 0:
+                              deg = LH[i].degree()+RH[j].degree()
+                              w = transback[n+deg](vec(x))
+                              operationData['sq'+str(n)][dot_id] = ["{0}-{1}".format(aOfOneOffset[i][0],j) for i,j in [displayBasis[n+deg][s] for s in w.support()]]
+                        else:
+                              operationData['sq'+str(n)][dot_id] = [0]
+      return operationData
