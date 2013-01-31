@@ -97,7 +97,7 @@ aOfOneOffset = [[0,0],
 		[26,13],
 		[34,17]]
 
-def print_sqi_for_js():
+def print_sqi_for_js(nice_print=True):
       """
       Function to output Sq^i data as dict for js functions
       """
@@ -112,7 +112,16 @@ def print_sqi_for_js():
                         if x != 0:
                               deg = LH[i].degree()+RH[j].degree()
                               w = transback[n+deg](vec(x))
-                              operationData['sq'+str(n)][dot_id] = ["{0}-{1}".format(aOfOneOffset[i][0],j) for i,j in [displayBasis[n+deg][s] for s in w.support()]]
+                              operationData['sq'+str(n)][dot_id] = ["{0}-{1}".format(aOfOneOffset[a][0],b) for a,b in [displayBasis[n+deg][s] for s in w.support()]]
                         else:
-                              operationData['sq'+str(n)][dot_id] = [0]
-      return operationData
+                              # id for zero dot is z-n,
+                              # where n is the operation type Sq^n
+                              operationData['sq'+str(n)][dot_id] = ['z-'+str(n)]
+      if nice_print:
+            for k in sorted(operationData.keys()):
+                  print "'%s': {"%k
+                  for js in sorted(operationData[k].keys()):
+                        print "  '%s': "%js + str(operationData[k][js]) + ','
+                  print "},"
+      else:
+            return operationData

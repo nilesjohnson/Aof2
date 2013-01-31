@@ -14,10 +14,12 @@ var basisType; // default set at bottom of this file
 var operationType = {'sq1': false, // toggled at bottom of this file
 		     'sq2': false,
 		     'sq4': false};
+// operationData defined on Aof2-sqi-data.js
+/*
 var operationData = {'sq1': {},  // fake data generated at end of file
 		     'sq2': {},
 		     'sq4': {}};
-
+*/
 
 
 
@@ -50,9 +52,22 @@ var dotAttr = {
     'fill': '#cccccc',
     'stroke': '#992244'
 };
+var dotAttrZero = {
+    'opacity': 1
+}
 var dotOn  = {'stroke-width': '3', 'fill': '#924' };
 
 var dotWidth = 4;
+
+var gridLineAttr = {
+    'stroke-width': '1',
+    'stroke': '#dee'
+}
+var gridLabelAttr = {
+    'stroke': '#777',
+    'font-size': '10',
+    'stroke-width': '.5'
+}
 
 var pathBottomAttr = {
     'stroke': '#fff',
@@ -106,16 +121,34 @@ document.getElementById('canvas_container').style.height = canvasHeight+'px';
 
 
 
-
-
 var dot = {};
 //currentDotId = false;
 var menu = false;
 //var info = [];
 //var menuList = [];
 
-
 var gridSize = 5*dotWidth;
+var gridLabelWidth = 30;
+
+//dots to show zero
+for (n = 1; n < 4; n++) {
+    var x = n*2*dotWidth + n+ gridLabelWidth;
+    var y = aOfTwoStartY;
+    var d = paper.circle(x,y,dotWidth);
+    if (n == 3) {
+	// hack to get n = 1, 2, 4
+	n++;
+    }
+    var dotId = 'z-'+n;
+    d.attr(dotAttr); // fix here
+    d.data('id',dotId);
+    d.data('selected',0);
+    d.data('position',[x,y]);
+    //d.click(clickHandler);
+    //d.node.style.cursor = 'pointer';
+    dot[dotId] = d;
+}
+
 var aOfOne = function(x,y,i) {
     // draw dots
     var gridSteps = [[0,0],
@@ -266,6 +299,7 @@ for (lineType in connectAOfOne) {
 // keys are dot id's, and values are lists of dot id's 
 // which sum to Sq^n of given dot
 //var sqOneData = {};
+/*
 for (var i = 0; i < aOfOneOffset.length; i++) {
     ix = aOfOneOffset[i][0];
     for (var j = 0; j < 8; j++) {
@@ -296,6 +330,24 @@ for (var i = 0; i < aOfOneOffset.length; i++) {
 					 iz+'-'+((j+4) % 8)];
     }
 }
+*/
+
+// Draw background grid
+var paperGrid = paper.set();
+for (var i = 0; i+4 < canvasHeight/gridSize; i++) {
+    var gridPath = paper.path('M ' +
+			      gridLabelWidth + ' ' +
+			      (i*gridSize+aOfTwoStartY) + ' ' +
+			      'l ' + canvasWidth + ' 0');
+    gridPath.attr(gridLineAttr);
+    paperGrid.push(gridPath);
+    var gridLabel = paper.text(gridLabelWidth/2,
+			       i*gridSize+aOfTwoStartY,
+			       (1*i).toString());
+    gridLabel.attr(gridLabelAttr).toFront();
+    paperGrid.push(gridLabel);
+}
+paperGrid.toBack();
 
 
 setBasisType('adem');

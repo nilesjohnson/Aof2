@@ -35,6 +35,8 @@ body {
     left: 536px;
     width: 380px;
 }
+.options li {
+}
 
 .options li a {
     text-decoration: none;
@@ -51,24 +53,14 @@ body {
 .options li.selected {
     background-color: #caa;
 }
-<!--
-#option-sq1.selected {
-    background-color: #2fbfbf;
-}
-#option-sq2.selected {
-    background-color: #77bf2f;
-}
-#option-sq4.selected {
-    background-color: #772fbf;
-}
--->
 
 .options li {
     list-style-type: none;
     margin-bottom: 3px;
+    background: #fff;
 }
 .options ul {
-    padding-left: 5px;
+    padding-left: 0px;
 }
 .options > ul > li {
     float:left;
