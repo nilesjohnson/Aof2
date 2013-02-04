@@ -44,12 +44,17 @@ var clearAll = function(cleardots) {
 
       if cleardots is false, then clear menu but not dots
      */
+    //alert('clearAll');
     cleardots = typeof cleardots !== 'undefined' ? cleardots : true
     for (id in dot) {
 	var dotItem = dot[id];
-        if ( dotItem.data( 'selected' ) == 1 ) {
+        if ( dotItem.data('selected') == 1 ) {
 	    if (cleardots) {
 		dotItem.animate( dotAttr, 150 ).data('selected', 0 );
+		if (dotItem.data('id').substring(0,1) == 'z') {
+		    //alert('opacity: 0')
+		    dotItem.animate({'opacity': '0'}, 150);
+		}
 	    }
 	    clearMenu();
 	    menu = false;
@@ -75,11 +80,20 @@ function cancelBubble(e) {
 
 var updateDot = function(id,attr,selected) {
     // highlight dot with given id
+    //alert('updateDot: '+id);
     if (selected) {
 	dot[id].animate(attr, 150).data('selected', 1);
+	if (id.substring(0,1) == 'z') {
+	    var op = dot[id].attr('opacity');
+	    dot[id].animate({'opacity': '1'}, 150);
+	}
     }
     else {
 	dot[id].animate(dotAttr, 150).data('selected', 0);
+	if (id.substring(0,1) == 'z') {
+	    var op = dot[id].attr('opacity');
+	    dot[id].animate({'opacity': '0'}, 150);
+	}
     }
 }
 

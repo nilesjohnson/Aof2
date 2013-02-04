@@ -53,7 +53,12 @@ var dotAttr = {
     'stroke': '#992244'
 };
 var dotAttrZero = {
-    'opacity': 1
+    'opacity': '0'
+}
+var zeroBoxAttr = {
+    'stroke-width': '0',
+    'opacity': '1',
+    'fill': '#fec8d3'
 }
 var dotOn  = {'stroke-width': '3', 'fill': '#924' };
 
@@ -131,8 +136,11 @@ var gridSize = 5*dotWidth;
 var gridLabelWidth = 30;
 
 //dots to show zero
+var zeroBox = paper.rect(gridLabelWidth, aOfTwoStartY - 2*dotWidth, 
+			 9*dotWidth, 4*dotWidth, 5).attr(zeroBoxAttr);
+var zeroText = paper.text(gridLabelWidth + 4*dotWidth + 2, aOfTwoStartY + 3*dotWidth, 'zero');
 for (n = 1; n < 4; n++) {
-    var x = n*2*dotWidth + n+ gridLabelWidth;
+    var x = n*2*dotWidth + n + gridLabelWidth;
     var y = aOfTwoStartY;
     var d = paper.circle(x,y,dotWidth);
     if (n == 3) {
@@ -140,7 +148,8 @@ for (n = 1; n < 4; n++) {
 	n++;
     }
     var dotId = 'z-'+n;
-    d.attr(dotAttr); // fix here
+    d.attr(dotAttr);
+    d.attr({'opacity': '0'})
     d.data('id',dotId);
     d.data('selected',0);
     d.data('position',[x,y]);
