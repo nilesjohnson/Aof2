@@ -21,15 +21,27 @@ $( "#menu" ).menu();
 
 <body>
 
-<h1 id="title">Visualization of \(A(2)\)</h1>
+<h1 id="title">Visualization of \(\mathcal{A}(2)\)</h1>
+Robert Bruner and Niles Johnson, 2012
 
 <div id="instructions">
   <h2>Instructions</h2>
-  <p>Clicking each dot shows a menu.  Click "Adem" or "Milnor" to
-  change the info displayed in the box.</p>
+  <p>Clicking a dot displays the information about it which you have selected from the
+  menu at right.  'Adem' or 'Milnor' shows the representation of the element in either the
+  admissable basis or the Milnor basis, respectively.  'None' will turn this display off.
+  </p>
 
-  <p>Click the different \(Sq^i\) to toggle display of that
-  information.</p>
+  <p>The 'Operation' menu selects the subset of operations which will be displayed.
+  For example, if all three operations, 
+  \(Sq^1\),
+  \(Sq^2\), and
+  \(Sq^4\), are all selected, then clicking on the dot corresponding to \(x\) will cause
+  \(Sq^1 x\),
+  \(Sq^2 x\), and
+  \(Sq^4 x\), to be highlighted, in the colors corresponding to the menu entries.
+  If one of these values is zero, the dot in the upper left labelled zero will be
+  highlighted to indicate that.  If the result is a sum, all terms in the sum will be highlighted.
+  </p>
 </div>
 
 
@@ -43,7 +55,7 @@ $( "#menu" ).menu();
       <ul>  
 	<li id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;">Adem</a></li>
 	<li id="option-milnor"><a href="#" onclick="setBasisType('milnor'); return false;">Milnor</a></li>
-	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;">none</a></li>
+	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;">None</a></li>
       </ul>
     </li>
     <li>Operation
@@ -51,7 +63,6 @@ $( "#menu" ).menu();
 	<li id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;">\(Sq^1\)</a></li>
 	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;">\(Sq^2\)</a></li>
 	<li id="option-sq4"><a href="#" onclick="toggleOperation('sq4'); return false;">\(Sq^4\)</a></li>
-	<li id="option-full-submod"><a href="#" onclick="return false;">Full submodule</a></li>
       </ul>
     </li>
   </ul>
@@ -640,9 +651,70 @@ Sq(7,3,1)
 
 </div>
 
+<h2>Explanation of the display</h2>
+<p>
+It is (just barely) possible to represent \(\mathcal{A}(2)\)
+by drawing dots representing a basis for it, together with lines representing
+the left action of 
+\(Sq^1\),
+\(Sq^2\), and
+\(Sq^4\) (see <a href="http://www.staff.science.uu.nl/~henri105/PDF/A2.pdf">
+Andre Henriques' drawing</a>).
+</p>
+<p>
+The representation here breaks \(\mathcal{A}(2)\) into the 8 left cosets of
+\(\mathcal{A}(1)\).  This has several useful features:
+<ul>
+<li> It is 'even-handed', giving 8 subsets of size 8.</li>
+<li> It is well related to \(ko\)-theory.</li>
+<li> It has a simple form, since
+\(\mathcal{A}(2)/\!/\mathcal{A}(1) = \mathcal{A}(2)/\mathcal{A}(2)(Sq^1,Sq^2)\)
+is concentrated in dimensions 0, 4, 6, 7, 10, 11, 13 and 17.</li>
+</ul>
+These cosets are represented by
+<ul>
+<li> \( 1\) </li>
+<li> \( Sq^4\) </li>
+<li> \( Sq^2 Sq^4\) </li>
+<li> \( Sq^3 Sq^4 \) </li>
+<li> \( Sq^4 Sq^2 Sq^4\) </li>
+<li> \(  Sq^5 Sq^2 Sq^4 = Sq^4 Sq^3 Sq^4 \) </li>
+<li> \( Sq^2 Sq^4 Sq^3 Sq^4\) </li>
+<li> \( Sq^4 Sq^2 Sq^4 Sq^3 Sq^4 \) </li>
+</ul>
+which can be seen across the top of the display.  The copy of 
+\(\mathcal{A}(1)\) 'hanging' from \(x\) contains all the classes in
+\(x\mathcal{A}(1)\) where \(x\) is one of these 8 elements.
+</p>
+
+<p>
+This
+gives a description of each element in terms of the generators
+\(Sq^1\),
+\(Sq^2\), and
+\(Sq^4\) in the form \(xy\), where \(x\) is one of the 8 elements above,
+selecting the coset, and \(y\) is an element of \(\mathcal{A}(1)\).  For example,
+the third element from the top in the third group from the left has the representation
+\((Sq^2 Sq^4)(Sq^2)\).  In the admissable basis, this is \(Sq^6 Sq^2\), which can
+be verified by clicking on it, while the 'Adem' menu item is on.
+</p>
+
+<p>
+Thus, the cosets are given
+by left multiplications, while the elements within the coset are given 
+by right multiplications.
+In this form, the left action of \(\mathcal{A}(2)\) on itself is not readily visible.
+The 'Operation' menu is there to provide this information.  Some of the actions will be
+obvious, such as \(Sq^2\) acting on the second or sixth \(\mathcal{A}(1)\) or
+\(Sq^4\) acting on the first or next to last \(\mathcal{A}(1)\).
+The values \(Sq^i x\)  are the sums of the highlighted items, if nonzero.  If the 
+result is zero, the corresponding dot in the upper left, labelled zero, is
+highlighted.
+</p>
 
 
 
+<h3>Tools</h3>
 <p style="clear: both"><a href="http://raphaeljs.com/">Raphaël.js</a> is a javascript
 library for working with graphics in html.  Take a look at the
 homepage for more sophisticated demos.</p>
@@ -652,6 +724,7 @@ homepage for more sophisticated demos.</p>
 <ul>
   <li>background grid lines</li>
   <li>"zero dots" to show when \(Sq^i x\) is zero</li>
+  <li> Instructions and explanation </li>
 </ul>
 
 <h2>TODO</h2>
