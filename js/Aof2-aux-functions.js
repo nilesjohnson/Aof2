@@ -10,14 +10,8 @@ var basisElement = function(id,basisType) {
     return document.getElementById('dot-'+id+'-'+basisType);
 }
 
-var setBasisType = function(str) {
-    basisType = str;
-    clearBasisType();
-    document.getElementById('option-'+str).className = "selected";
-    menu = drawMenu(menu['id']);
-    return false;
-}
 var clearBasisType = function() {
+    // clear selection of basis type
     document.getElementById('option-adem').className = 'unselected';
     document.getElementById('option-milnor').className = 'unselected';
     document.getElementById('option-none').className = 'unselected';
@@ -65,6 +59,7 @@ var clearAll = function(cleardots) {
 
 function cancelBubble(e) {
     // stop (click) event bubbling
+    // this function is currently unused
     alert(e);
     var evt = e ? e:window.event;
     if (evt.stopPropagation) {
@@ -77,6 +72,7 @@ function cancelBubble(e) {
 
 function fireEvent(element,event) {
     // http://stackoverflow.com/questions/9855003/raphael-object-simulate-click
+    // this function is currently unused
     if (document.createEventObject) {
         // dispatch for IE
         var evt = document.createEventObject();

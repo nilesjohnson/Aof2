@@ -5,8 +5,15 @@
 */
 
 
-
-
+var setBasisType = function(str) {
+    // Set display for elements of A(2) to use
+    // Adem (admissible) basis, Milnor basis, or none
+    basisType = str;
+    clearBasisType();
+    document.getElementById('option-'+str).className = "selected";
+    menu = drawMenu(menu['id']);
+    return false;
+}
 
 var toggleOperation = function(str) {
     // Toggle to display or not display which 
@@ -44,60 +51,6 @@ var clickHandler = function() {
     //document.getElementById('dot-'+this.data('id')+'-info').style.display = "block";
 };
 
-
-/*
-var operationMenuHandler = function() {
-    //  This function is called when a menu item is clicked, with 'this'
-    //  referring to the item that was clicked
-    
-    for (var j = 0; j < itemLabel.length; j++) {
-	// clear all other menu output
-	document.getElementById('dot-'+this.data('id')+'-'+itemLabel[j]).style.display = "none";
-    }
-    //
-    infoId = 'dot-'+this.data('id')+'-'+this.data('type');
-    document.getElementById(infoId).style.display = "block";
-};
-*/
-
-/*
-var basisMenuHandler = function() {
-    var id = this.data('id');
-    infoId = 'dot-'+id+'-'+this.data('type');
-    //clear basis display for this dot
-    document.getElementById('dot-'+id+'-milnor').style.display = 'none';
-    document.getElementById('dot-'+id+'-milnor').style.position = 'static';
-    document.getElementById('dot-'+id+'-adem').style.display = 'none';
-    document.getElementById('dot-'+id+'-adem').style.position = 'static';
-    info = document.getElementById(infoId);
-    info.style.display = "block";
-    info.style.position = "absolute";
-    info.style.left = (dot[id].data('position')[0]+canvasOffsetX)+'px';
-    info.style.top = (dot[id].data('position')[1]+canvasOffsetY)+'px';
-}
-*/
-
-/*
-var pointerMouseover = function() {
-    this.style.cursor = 'pointer';
-}
-*/
-
-/*
-itemLabel = ['adem',
-	     'milnor',
-	     'sq1',
-	     'sq2',
-	     'sq4',
-	     'submodule'];
-
-itemHandler = [basisMenuHandler,
-	       basisMenuHandler,
-	       operationMenuHandler,
-	       operationMenuHandler,
-	       operationMenuHandler,
-	       operationMenuHandler];
-*/
 
 function drawMenu(dotId) {
     /*
@@ -185,47 +138,10 @@ function drawMenu(dotId) {
     menuContainer.data('id', dotId);
     menuSet.push(menuContainer)
     menuContainer.attr(menuAttr);
-    /*
-    for (var i = 0; i < numItems; i++) {
-	// add items to menu
-	itemPosX = posX+10;
-	itemPosY = posY-10 + i*itemHeight;
-	var item = paper.set();
-	var itemRect = paper.rect(itemPosX,itemPosY,menuWidth,itemHeight,0).attr({opacity: '0'});
-	itemRect.attr(menuItemAttr);
-	item.push(itemRect);
-	var itemText = paper.text(itemPosX+menuWidth/2,itemPosY+itemHeight/2,itemLabel[i]).attr({opacity: '0'});
-	item.push(itemText);
-	item.attr({cursor: 'pointer'});
-	item.data('number',dotNum);
-	item.data('type',itemLabel[i]);
-	item.click(itemHandler[i]);	
-	menuSet.push(item);
-    }
-    */
+
     menuSet.toFront();
     dot[dotId].toFront();
     return menuSet;
 };
 
-
-
-
-
-//circle.attr({fill: '#000', stroke: 'none'});
-//var text = paper.text(250, 250, 'Bye Bye Circle!');
-//text.attr({opacity: 0, 'font-size': 12}).toBack(); 
-
-/*
-circle.node.onmouseover = function() {  
-    this.style.cursor = 'pointer';  
-}  
-
-circle.node.onclick = function() {  
-    text.animate({opacity: 1}, 2000);  
-    circle.animate({opacity: 0}, 2000, function() {  
-        this.remove();  
-    });  
-}  
-*/
 

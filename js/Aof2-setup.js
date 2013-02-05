@@ -131,10 +131,7 @@ document.getElementById('canvas_container').style.height = canvasHeight+'px';
 
 
 var dot = {};
-//currentDotId = false;
 var menu = false;
-//var info = [];
-//var menuList = [];
 
 var gridSize = 5*dotWidth;
 var gridLabelWidth = 30;
@@ -163,7 +160,7 @@ for (n = 1; n < 4; n++) {
 }
 
 var aOfOne = function(x,y,i) {
-    // draw dots
+    // draw dots for copy of A(1)
     var gridSteps = [[0,0],
 		     [0,1],
 		     [0,1],
@@ -223,7 +220,7 @@ var aOfOne = function(x,y,i) {
     }
 };
 
-// draw A(2) as copies of A(1)
+// offset positions for copies of A(1)
 aOfOneOffset = [[0,0], // made aspect ratio 2 to 1, so vertical position equals
 		[8,4], // degree, while lines defining the same operation remain 
 		[12,6], // parallel
@@ -233,7 +230,7 @@ aOfOneOffset = [[0,0], // made aspect ratio 2 to 1, so vertical position equals
 		[26,13],
 		[34,17]];
 
-    
+// draw A(2) as copies of A(1)    
 for (var i=0; i < aOfOneOffset.length; i++) {
     x = aOfOneOffset[i][0];
     y = aOfOneOffset[i][1];
@@ -308,42 +305,7 @@ for (lineType in connectAOfOne) {
     }
 }
 
-// some fake Sq^n data
-// keys are dot id's, and values are lists of dot id's 
-// which sum to Sq^n of given dot
-//var sqOneData = {};
-/*
-for (var i = 0; i < aOfOneOffset.length; i++) {
-    ix = aOfOneOffset[i][0];
-    for (var j = 0; j < 8; j++) {
-	operationData['sq1'][ix+'-'+j] = [ix+'-'+((j+2) % 8),
-					 ix+'-'+((j+3) % 8),
-					 ix+'-'+((j+4) % 8)];
-    }
-}
 
-//var sqTwoData = {};
-for (var i = 0; i < aOfOneOffset.length; i++) {
-    ix = aOfOneOffset[i][0];
-    for (var j = 0; j < 8; j++) {
-	iz = aOfOneOffset[(i+1) % aOfOneOffset.length][0]
-	operationData['sq2'][ix+'-'+j] = [iz+'-'+((j+2) % 8),
-					 iz+'-'+((j+3) % 8),
-					 iz+'-'+((j+4) % 8),
-					 iz+'-'+((j+7) % 8)];
-    }
-}
-
-//var sqFourData = {};
-for (var i = 0; i < aOfOneOffset.length; i++) {
-    ix = aOfOneOffset[i][0];
-    for (var j = 0; j < 8; j++) {
-	iz = aOfOneOffset[(i+3) % aOfOneOffset.length][0]
-	operationData['sq4'][ix+'-'+j] = [iz+'-'+((j+2) % 8),
-					 iz+'-'+((j+4) % 8)];
-    }
-}
-*/
 
 // Draw background grid
 var paperGrid = paper.set();
@@ -363,10 +325,12 @@ for (var i = 0; i+4 < canvasHeight/gridSize; i++) {
 }
 paperGrid.toBack();
 
+
 // set up initial state of application
 setBasisType('adem');
 toggleOperation('sq1');
 dot['12-2'].animate( dotOn, 150 ).data('selected', 1);
+
 
 // set click anywhere to clear menu
 document.body.addEventListener('click',clearMenu,true);
