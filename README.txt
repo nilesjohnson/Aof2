@@ -36,4 +36,4 @@ Done
  * Set dot 12-0 (Sq^6 Sq^2) to be highlighted on document load
  * Update css for Explanation section
  * Alternate colors of grid lines
- 
+ * Update display of 8 coset representatives

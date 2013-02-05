@@ -76,6 +76,97 @@ Robert Bruner and Niles Johnson, 2012
 
 
 
+
+<div id="explanation">
+<h2>Explanation of the display</h2>
+<p>
+It is (just barely) possible to represent \(\mathcal{A}(2)\)
+by drawing dots representing a basis for it, together with lines representing
+the left action of 
+\(Sq^1\),
+\(Sq^2\), and
+\(Sq^4\) (see <a href="http://www.staff.science.uu.nl/~henri105/PDF/A2.pdf">
+Andre Henriques' drawing</a>).
+</p>
+<p>
+The representation here breaks \(\mathcal{A}(2)\) into the 8 left cosets of
+\(\mathcal{A}(1)\).  This has several useful features:
+<ul>
+<li> It is 'even-handed', giving 8 subsets of size 8.</li>
+<li> It is well related to \(ko\)-theory.</li>
+<li> It has a simple form, since
+\(\mathcal{A}(2)/\!/\mathcal{A}(1) = \mathcal{A}(2)/\mathcal{A}(2)(Sq^1,Sq^2)\)
+is concentrated in dimensions 0, 4, 6, 7, 10, 11, 13 and 17.</li>
+</ul>
+These cosets are represented by the following elements, which appear
+along the top of the diagram:
+</p>
+
+<!-- simpler version
+<ul>
+<li> \( 1\) </li>
+<li> \( Sq^4\) </li>
+<li> \( Sq^2 Sq^4\) </li>
+<li> \( Sq^3 Sq^4 \) </li>
+<li> \( Sq^4 Sq^2 Sq^4\) </li>
+<li> \(  Sq^5 Sq^2 Sq^4 = Sq^4 Sq^3 Sq^4 \) </li>
+<li> \( Sq^2 Sq^4 Sq^3 Sq^4\) </li>
+<li> \( Sq^4 Sq^2 Sq^4 Sq^3 Sq^4 \) </li>
+</ul>
+-->
+
+
+\begin{align}
+1 & \\
+Sq^4 & \\
+Sq^2 Sq^4 & = Sq^6 + Sq^5 Sq^1 \\
+Sq^1 Sq^2 Sq^4 = Sq^3 Sq^4 & = Sq^7 \\
+Sq^4 Sq^2 Sq^4 & = Sq^{10} + Sq^9 Sq^1 + Sq^8 Sq^2 + Sq^7 Sq^2 Sq^1 \\
+Sq^4 Sq^3 Sq^4 = Sq^5 Sq^2 Sq^4 & = Sq^{11} + Sq^9 Sq^2 \\
+Sq^2 Sq^4 Sq^3 Sq^4 & = Sq^{13} + Sq^{12} Sq^1 + Sq^{10} Sq^3 \\
+Sq^4 Sq^2 Sq^4 Sq^3 Sq^4 & = Sq^{17}
++ Sq^{16} Sq^1
++ Sq^{15} Sq^2
++ Sq^{14} Sq^2 Sq^1
++ Sq^{12} Sq^5
++ Sq^{12} Sq^4 Sq^1
+\end{align}
+
+<p>
+The copy of \(\mathcal{A}(1)\) 'hanging' from \(x\) contains all
+the classes in \(x\mathcal{A}(1)\) where \(x\) is one of these 8
+elements.
+</p>
+
+<p>
+This
+gives a description of each element in terms of the generators
+\(Sq^1\),
+\(Sq^2\), and
+\(Sq^4\) in the form \(xy\), where \(x\) is one of the 8 elements above,
+selecting the coset, and \(y\) is an element of \(\mathcal{A}(1)\).  For example,
+the third element from the top in the third group from the left has the representation
+\((Sq^2 Sq^4)(Sq^2)\).  In the admissable basis, this is \(Sq^6 Sq^2\), which can
+be verified by clicking on it, while the 'Adem' menu item is on.
+</p>
+
+<p>
+Thus, the cosets are given
+by left multiplications, while the elements within the coset are given 
+by right multiplications.
+In this form, the left action of \(\mathcal{A}(2)\) on itself is not readily visible.
+The 'Operation' menu is there to provide this information.  Some of the actions will be
+obvious, such as \(Sq^2\) acting on the second or sixth \(\mathcal{A}(1)\) or
+\(Sq^4\) acting on the first or next to last \(\mathcal{A}(1)\).
+The values \(Sq^i x\)  are the sums of the highlighted items, if nonzero.  If the 
+result is zero, the corresponding dot in the upper left, labelled zero, is
+highlighted.
+</p>
+</div>
+
+
+
+
 <div id="element-info" class="info">
 
 
@@ -656,68 +747,6 @@ Sq(7,3,1)
 
 </div>
 
-<div id="explanation">
-<h2>Explanation of the display</h2>
-<p>
-It is (just barely) possible to represent \(\mathcal{A}(2)\)
-by drawing dots representing a basis for it, together with lines representing
-the left action of 
-\(Sq^1\),
-\(Sq^2\), and
-\(Sq^4\) (see <a href="http://www.staff.science.uu.nl/~henri105/PDF/A2.pdf">
-Andre Henriques' drawing</a>).
-</p>
-<p>
-The representation here breaks \(\mathcal{A}(2)\) into the 8 left cosets of
-\(\mathcal{A}(1)\).  This has several useful features:
-<ul>
-<li> It is 'even-handed', giving 8 subsets of size 8.</li>
-<li> It is well related to \(ko\)-theory.</li>
-<li> It has a simple form, since
-\(\mathcal{A}(2)/\!/\mathcal{A}(1) = \mathcal{A}(2)/\mathcal{A}(2)(Sq^1,Sq^2)\)
-is concentrated in dimensions 0, 4, 6, 7, 10, 11, 13 and 17.</li>
-</ul>
-These cosets are represented by
-<ul>
-<li> \( 1\) </li>
-<li> \( Sq^4\) </li>
-<li> \( Sq^2 Sq^4\) </li>
-<li> \( Sq^3 Sq^4 \) </li>
-<li> \( Sq^4 Sq^2 Sq^4\) </li>
-<li> \(  Sq^5 Sq^2 Sq^4 = Sq^4 Sq^3 Sq^4 \) </li>
-<li> \( Sq^2 Sq^4 Sq^3 Sq^4\) </li>
-<li> \( Sq^4 Sq^2 Sq^4 Sq^3 Sq^4 \) </li>
-</ul>
-which can be seen across the top of the display.  The copy of 
-\(\mathcal{A}(1)\) 'hanging' from \(x\) contains all the classes in
-\(x\mathcal{A}(1)\) where \(x\) is one of these 8 elements.
-</p>
-
-<p>
-This
-gives a description of each element in terms of the generators
-\(Sq^1\),
-\(Sq^2\), and
-\(Sq^4\) in the form \(xy\), where \(x\) is one of the 8 elements above,
-selecting the coset, and \(y\) is an element of \(\mathcal{A}(1)\).  For example,
-the third element from the top in the third group from the left has the representation
-\((Sq^2 Sq^4)(Sq^2)\).  In the admissable basis, this is \(Sq^6 Sq^2\), which can
-be verified by clicking on it, while the 'Adem' menu item is on.
-</p>
-
-<p>
-Thus, the cosets are given
-by left multiplications, while the elements within the coset are given 
-by right multiplications.
-In this form, the left action of \(\mathcal{A}(2)\) on itself is not readily visible.
-The 'Operation' menu is there to provide this information.  Some of the actions will be
-obvious, such as \(Sq^2\) acting on the second or sixth \(\mathcal{A}(1)\) or
-\(Sq^4\) acting on the first or next to last \(\mathcal{A}(1)\).
-The values \(Sq^i x\)  are the sums of the highlighted items, if nonzero.  If the 
-result is zero, the corresponding dot in the upper left, labelled zero, is
-highlighted.
-</p>
-</div>
 
 
 <h3>About this page</h3>
