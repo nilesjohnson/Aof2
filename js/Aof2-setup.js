@@ -64,7 +64,11 @@ var dotOn  = {'stroke-width': '3', 'fill': '#924' };
 
 var dotWidth = 4;
 
-var gridLineAttr = {
+var gridLineEvenAttr = {
+    'stroke-width': '1',
+    'stroke': '#cde'
+}
+var gridLineOddAttr = {
     'stroke-width': '1',
     'stroke': '#dee'
 }
@@ -344,6 +348,7 @@ for (var i = 0; i < aOfOneOffset.length; i++) {
 // Draw background grid
 var paperGrid = paper.set();
 for (var i = 0; i+4 < canvasHeight/gridSize; i++) {
+    gridLineAttr = (i%2) == 0 ? gridLineEvenAttr : gridLineOddAttr;
     var gridPath = paper.path('M ' +
 			      gridLabelWidth + ' ' +
 			      (i*gridSize+aOfTwoStartY) + ' ' +

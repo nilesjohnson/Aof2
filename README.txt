@@ -27,6 +27,13 @@ Done
  * improve positioning of canvas, options, and basis display
  * Hide display of "zero dots" when not highlighted
  * Tested fade effect for clear/draw menu, and decided it looks better without effect
+
+ [RRB 1/4]
  * Write description and instructions
+
+ [NJ 1/5]
+ * Move position of "Clear all" box
  * Set dot 12-0 (Sq^6 Sq^2) to be highlighted on document load
- * 
+ * Update css for Explanation section
+ * Alternate colors of grid lines
+ 
