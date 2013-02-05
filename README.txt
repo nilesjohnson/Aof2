@@ -28,3 +28,5 @@ Done
  * Hide display of "zero dots" when not highlighted
  * Tested fade effect for clear/draw menu, and decided it looks better without effect
  * Write description and instructions
+ * Set dot 12-0 (Sq^6 Sq^2) to be highlighted on document load
+ * 

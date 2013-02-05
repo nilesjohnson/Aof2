@@ -358,8 +358,10 @@ for (var i = 0; i+4 < canvasHeight/gridSize; i++) {
 }
 paperGrid.toBack();
 
-
+// set up initial state of application
 setBasisType('adem');
 toggleOperation('sq1');
+dot['12-2'].animate( dotOn, 150 ).data('selected', 1);
 
+// set click anywhere to clear menu
 document.body.addEventListener('click',clearMenu,true);

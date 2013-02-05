@@ -10,15 +10,18 @@ body {
     margin: 20px 0;
 }
 
-#canvas_container, #instructions {  
+#canvas_container, 
+body {  
     width: 900px;  
 }
 #canvas_container {
     border: 0px solid #aaa;
     float: left;
 }
-#instructions {
+#instructions,
+#explanation {
     margin: 10px;
+    clear: both;
 }
 
 .info p {

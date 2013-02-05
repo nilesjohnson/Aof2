@@ -75,7 +75,20 @@ function cancelBubble(e) {
     }
 }
 
-
+function fireEvent(element,event) {
+    // http://stackoverflow.com/questions/9855003/raphael-object-simulate-click
+    if (document.createEventObject) {
+        // dispatch for IE
+        var evt = document.createEventObject();
+        return element.fireEvent('on'+event,evt)
+    } else {
+        // dispatch for firefox + others
+        var evt = document.createEvent("HTMLEvents");
+        evt.initEvent(event, true, true); // event type,bubbling,cancelable
+        return !element.dispatchEvent(evt);
+    }
+}
+ 
 
 
 var updateDot = function(id,attr,selected) {
