@@ -37,3 +37,8 @@ Done
  * Update css for Explanation section
  * Alternate colors of grid lines
  * Update display of 8 coset representatives
+
+ [NJ 1/6]
+ * set balloon menu to redraw when window is resized.  This fixes a
+ display bug when changing orientation of the window on mobile/tablet
+ devices.

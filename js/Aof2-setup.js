@@ -338,13 +338,17 @@ document.body.addEventListener('click',clearMenu,true);
 // redraw balloon menu
 // when window is resized (e.g. on mobile devices)
 window.addEventListener("resize", function() {
+    // set a timeout so this function does not
+    // run continuously while window is resizing
     clearTimeout(this.id);
     this.id = setTimeout(function() {
+	// what to do when the timeout interval has elapsed:
+	// recompute canvas offset, then clear balloon menu and redraw
 	recomputeCanvasOffset();
 	if (menu) {
 	    clearMenu();
 	    menu = drawMenu(menu['id']);
 	}
-    },500)
+    },100) // timeout of 100 ms
     return false;
 });
