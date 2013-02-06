@@ -3,6 +3,13 @@
   Version 0.3
 */
 
+var recomputeCanvasOffset = function() {
+    // recompute offset of canvas from (0,0), for correct positioning of 
+    // basis info in balloon menus
+    canvasOffsetX = document.getElementById('canvas_container').offsetLeft;
+    canvasOffsetY = document.getElementById('canvas_container').offsetTop;
+}
+
 var basisElement = function(id,basisType) {
     // given input id, return html element storing milnor basis for dot i
     // type is either 'adem' or 'milnor'

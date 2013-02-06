@@ -334,3 +334,17 @@ dot['12-2'].animate( dotOn, 150 ).data('selected', 1);
 
 // set click anywhere to clear menu
 document.body.addEventListener('click',clearMenu,true);
+
+// redraw balloon menu
+// when window is resized (e.g. on mobile devices)
+window.addEventListener("resize", function() {
+    clearTimeout(this.id);
+    this.id = setTimeout(function() {
+	recomputeCanvasOffset();
+	if (menu) {
+	    clearMenu();
+	    menu = drawMenu(menu['id']);
+	}
+    },500)
+    return false;
+});
