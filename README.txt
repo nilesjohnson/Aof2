@@ -1,44 +1,29 @@
-Visualization of A(2).
+Visualization of A(2)
+http://www.nilesjohnson.net/Aof2
 
-A web application using Raphael.js to organize A(2) and show it's structure by 
-the coset decomposition A(2)//A(1).
+A web application using Raphael.js to organize A(2) and show 
+it's structure by the coset decomposition A(2)//A(1)
+
+Version 1.0
 
 
-TODO
+Copyright 2013 Robert Bruner and Niles Johnson
 
- * Implement display of submodules and/or cyclic modules
- * Add Sage source code
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+
+
  * Think carefully about color scheme
- * Decide on license
- * Decide on publicity of source code, and this TODO list
-
-Done
-
- * "None" option for basis type still doesn't work
- * Clicking an option should update the current display immediately
- * Re-work to use 2:1 aspect ratio (fix 'squareStep')
- * Set highlighted dots to be solid red
- * Separated basis sums with more than two summands for automatic line-breaking
- * Dynamically resize info balloon to fit basis info
- * Balloons have rounded corners and no separate border.
- * Add Sqi data
- * Fixed: balloon menu showing Adem/Milnor representation could be placed differently for different dots; for example it could have the pointer at the bottom, or on the right side
- * Fixed: Milnor basis sometimes falls outside of balloon
- * improve positioning of canvas, options, and basis display
- * Hide display of "zero dots" when not highlighted
- * Tested fade effect for clear/draw menu, and decided it looks better without effect
-
- [RRB 1/4]
- * Write description and instructions
-
- [NJ 1/5]
- * Move position of "Clear all" box
- * Set dot 12-0 (Sq^6 Sq^2) to be highlighted on document load
- * Update css for Explanation section
- * Alternate colors of grid lines
- * Update display of 8 coset representatives
-
- [NJ 1/6]
- * set balloon menu to redraw when window is resized.  This fixes a
- display bug when changing orientation of the window on mobile/tablet
- devices.

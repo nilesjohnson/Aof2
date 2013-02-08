@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteBase /Aof2/
+RewriteRule ^$ index.html [L]
+
