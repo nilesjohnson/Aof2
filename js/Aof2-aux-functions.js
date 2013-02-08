@@ -1,6 +1,17 @@
 /*
-  helper functions
-  Version 0.3
+Visualization of A(2)
+http://www.nilesjohnson.net/Aof2/
+
+A web application using Raphael.js to organize A(2) and show 
+it's structure by the coset decomposition A(2)//A(1)
+
+Version 1.0
+
+Copyright 2013 Robert Bruner and Niles Johnson
+Licensed under GNU General Public License version 3 or later.
+See README.txt
+
+This file defines auxiliary functions for the application
 */
 
 var recomputeCanvasOffset = function() {
