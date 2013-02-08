@@ -71,9 +71,11 @@ var dotAttrZero = {
     'opacity': '0'
 }
 var zeroBoxAttr = {
-    'stroke-width': '0',
+    'stroke-width': '2',
+    'stroke-opacity': '.3',
+    'stroke': '#d8d400',
     'opacity': '1',
-    'fill': '#fec8d3'
+    'fill': '#f6f056'
 }
 
 var gridLineEvenAttr = {
