@@ -1,5 +1,5 @@
 Visualization of A(2)
-http://www.nilesjohnson.net/Aof2
+http://www.nilesjohnson.net/Aof2/
 
 A web application using Raphael.js to organize A(2) and show 
 it's structure by the coset decomposition A(2)//A(1)
@@ -24,6 +24,12 @@ Copyright 2013 Robert Bruner and Niles Johnson
 
 
 
+NOTES
+=====
+
+The source code for this project is available as a git repository
+
+https://bitbucket.org/nilesjohnson/aof2
 
 
- * Think carefully about color scheme
+* Version 1.0: initial release
