@@ -37,22 +37,22 @@ var operationData = {'sq1': {},  // fake data generated at end of file
 
 // styling attributes
 
+var dotWidth = 4;
 
-var operationAttrGeneric = {'stroke-width': 3,
-			    'fill': 'white',
-			    'stroke': '#000'};
-var operationAttr = {'sq1': {'stroke-width': 3,
-			     'fill': 'white'},
-		     'sq2': {'stroke-width': 3,
-			     'fill': 'white'},
-		     'sq4': {'stroke-width': 3,
-			     'fill': 'white'}};
-var operationColor = {'sq1': '#2fbfbf',
-		       'sq2': '#77bf2f',
-		       'sq4': '#772fbf'};
+var dotOn  = {'stroke': '#333', 'fill': '#8d0c28', r: 1.5*dotWidth};
+
+var operationAttr = {'sq1': {},
+		     'sq2': {},
+		     'sq4': {}};
+var operationColor = {'sq1': '#d87b06',
+		       'sq2': '#62ba16',
+		       'sq4': '#9f5cda'};
 for (type in operationAttr) {
-   operationAttr[type]['fill'] = operationColor[type];
-   operationAttr[type]['stroke'] = operationColor[type];
+    operationAttr[type]['fill'] = operationColor[type];
+    operationAttr[type]['stroke'] = '#222';//operationColor[type];
+    operationAttr[type]['stroke-opacity'] = '.7';//operationColor[type];
+    operationAttr[type]['stroke-width'] = '1.5';//operationColor[type];
+    operationAttr[type]['r'] = 1.5*dotWidth;
 }
 
 var dotAttr = {
@@ -60,7 +60,8 @@ var dotAttr = {
     'stroke-opacity': '1',
     'opacity': '1',
     'fill': '#cccccc',
-    'stroke': '#992244'
+    'stroke': '#8d0c28',
+    r: dotWidth
 };
 var dotAttrZero = {
     'opacity': '0'
@@ -70,9 +71,6 @@ var zeroBoxAttr = {
     'opacity': '1',
     'fill': '#fec8d3'
 }
-var dotOn  = {'stroke-width': '3', 'fill': '#924' };
-
-var dotWidth = 4;
 
 var gridLineEvenAttr = {
     'stroke-width': '1',
@@ -339,6 +337,8 @@ paperGrid.toBack();
 // set up initial state of application
 setBasisType('adem');
 toggleOperation('sq1');
+toggleOperation('sq2');
+toggleOperation('sq4');
 dot['12-2'].animate( dotOn, 150 ).data('selected', 1);
 showOperations('12-2');
 //menu = drawMenu('12-2');
