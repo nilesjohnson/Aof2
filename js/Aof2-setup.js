@@ -39,7 +39,11 @@ var operationData = {'sq1': {},  // fake data generated at end of file
 
 var dotWidth = 4;
 
-var dotOn  = {'stroke': '#333', 'fill': '#8d0c28', r: 1.5*dotWidth};
+var dotOn  = {'stroke': '#cd2c48', 
+	      'stroke-width': '2', 
+	      'stroke-opacity': '.4',
+	      'fill': '#8d0c28', 
+	      r: 1.5*dotWidth};
 
 var operationAttr = {'sq1': {},
 		     'sq2': {},
@@ -52,7 +56,7 @@ for (type in operationAttr) {
     operationAttr[type]['stroke'] = '#222';//operationColor[type];
     operationAttr[type]['stroke-opacity'] = '.7';//operationColor[type];
     operationAttr[type]['stroke-width'] = '1.5';//operationColor[type];
-    operationAttr[type]['r'] = 1.5*dotWidth;
+    operationAttr[type]['r'] = 1.4*dotWidth;
 }
 
 var dotAttr = {
@@ -335,13 +339,14 @@ paperGrid.toBack();
 
 
 // set up initial state of application
-setBasisType('adem');
+setBasisType('none');
 toggleOperation('sq1');
 toggleOperation('sq2');
 toggleOperation('sq4');
 dot['12-2'].animate( dotOn, 150 ).data('selected', 1);
 showOperations('12-2');
 //menu = drawMenu('12-2');
+menu = {'id': '12-2'};
 
 // set click anywhere to clear menu
 document.body.addEventListener('click',clearMenu,true);
