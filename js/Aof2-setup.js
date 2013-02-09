@@ -108,7 +108,7 @@ var infoAttr = {
 
 var menuItemAttr = {
     'fill': '#9cf',
-    'stroke-width': '0',
+    'stroke-width': '0'
 };
 
 var menuAttr = {
