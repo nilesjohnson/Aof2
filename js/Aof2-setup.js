@@ -108,7 +108,7 @@ var infoAttr = {
 
 var menuItemAttr = {
     'fill': '#9cf',
-    'stroke-width': '0',
+    'stroke-width': '0'
 };
 
 var menuAttr = {
@@ -272,10 +272,10 @@ var squareLine = function(id0,id1,squareStepFactor) {
     var y0 = dot[id0].data('position')[1];
     var x1 = dot[id1].data('position')[0];
     var y1 = dot[id1].data('position')[1];
-    instructions = [["M", x0, y0],
-		    ["l", squareStep, -squareStep],
-		    ["L", x1+squareStep, y1-squareStep],
-		    ["L", x1, y1]]
+    var instructions = [["M", x0, y0],
+			["l", squareStep, -squareStep],
+			["L", x1+squareStep, y1-squareStep],
+			["L", x1, y1]]
     var path1 = paper.path(instructions).attr(pathTopAttr).toBack();
     var path0 = paper.path(instructions).attr(pathBottomAttr).toBack();
 }
@@ -295,8 +295,8 @@ var straightLine = function(id0,id1) {
     var y0 = dot[id0].data('position')[1];
     var x1 = dot[id1].data('position')[0];
     var y1 = dot[id1].data('position')[1];
-    instructions = [["M", x0, y0],
-		    ["L", x1, y1]]
+    var instructions = [["M", x0, y0],
+			["L", x1, y1]]
     var path = paper.path(instructions).attr(pathTopAttr).toBack();
 }
 connectionLines = {'square': squareLine,
