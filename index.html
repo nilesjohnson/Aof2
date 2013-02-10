@@ -6,17 +6,6 @@
 
 <link rel="stylesheet" href="./css/style.css" />
 
-<!--
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
-<script>
-$(function() {
-$( "#menu" ).menu();
-});
-</script>
--->
-
 </head>
 
 <body onload="recomputeCanvasOffset(); return false;">
@@ -31,17 +20,16 @@ $( "#menu" ).menu();
 
   <p>The diagram below displays the Steenrod subalgebra
   \(\mathcal{A}(2)\) by its decomposition into eight left cosets of
-  \(\mathcal{A}(1)\).  Lines connecting these cosets show the left
-  action of \(Sq^1\), \(Sq^2\), and \(Sq^4\) on cosets.  Additional
-  information about this left action is more subtle, and is displayed
-  upon clicking dots.  </p>
+  \(\mathcal{A}(1)\).  The left action of \(Sq^1\), \(Sq^2\), and
+  \(Sq^4\) is displayed upon clicking dots.  </p>
 
-  <p>The "Basis type" options determine whether elements
-  are displayed in the Adem (admissible) basis, Milnor basis, or not
-  displayed.  The "Operation" menu selects a subset of operations to
-  act on the selected dot.  Operations which result in a sum are shown
-  by highlighting all summands, and operations which result in zero
-  are shown in the upper left corner.</p>
+  <p>The "Basis type" options determine whether elements 
+  are displayed in the Adem (admissible) basis, Milnor basis, or not 
+  displayed.  The "Generator" menu selects a subset of the generators to 
+  act on the selected dot by left multiplication.  Multiplications
+  which result in a sum are shown by highlighting all summands, and
+  multiplications which result in zero are shown in the upper left
+  corner.</p>
 
   <!--
   <p>For example, if all three operations, \(Sq^1\), \(Sq^2\), and
@@ -74,7 +62,7 @@ $( "#menu" ).menu();
 	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;" title="select type">None</a></li>
       </ul>
     </li>
-    <li>Operation
+    <li>Generator
       <ul>
 	<li id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;" title="toggle display">\(Sq^1\)</a></li>
 	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;" title="toggle display">\(Sq^2\)</a></li>
@@ -100,9 +88,9 @@ the left action of
 Andre Henriques' drawing</a>).
 </p>
 
-  <p>The representation here does not show all operations
+  <p>The representation here does not show all the multiplicative structure
   simultaneously.  We break \(\mathcal{A}(2)\) into the 8 left cosets
-  of \(\mathcal{A}(1)\) and give an interactive display of operations.
+  of \(\mathcal{A}(1)\) and give an interactive display of left multiplication by the generators.
   This has several useful features: </p>
 
 <ul>
@@ -167,7 +155,7 @@ Thus, the cosets are given by left multiplications, while the elements
 within each coset are given by right multiplications.  In this form,
 the left action of \(\mathcal{A}(2)\) on itself is not completely
 clear.  Some information is visible in the lines connecting cosets
-of \(\mathcal{A}(1)\), and the rest is determined by the operations
+of \(\mathcal{A}(1)\), and the rest is displayed by the left action of
 \(Sq^1\), \(Sq^2\), and \(Sq^4\).
 <!--
 The "Operation" menu provides this information.  Some of the
