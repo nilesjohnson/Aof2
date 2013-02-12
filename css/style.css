@@ -59,9 +59,6 @@ div.options {
     width: 380px;
 }
 
-span.options,
-div.options li ul li {
-}
 
 .options li a {
     text-decoration: none;
@@ -81,11 +78,13 @@ div.options li ul li {
 
 .options li {
     list-style-type: none;
+    list-style-position: outside;
     margin-bottom: 3px;
     background: #fff;
 }
 .options ul {
-    padding-left: 0px;
+    padding: 0;
+    margin: 0;
 }
 .options > ul > li {
     float:left;

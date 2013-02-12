@@ -341,6 +341,7 @@ paperGrid.toBack();
 
 
 // set up initial state of application
+var basisType;
 setBasisType('none');
 toggleOperation('sq1');
 toggleOperation('sq2');
@@ -349,6 +350,7 @@ dot['12-2'].animate( dotOn, 150 ).data('selected', 1);
 showOperations('12-2');
 //menu = drawMenu('12-2');
 menu = {'id': '12-2'};
+
 
 // set click anywhere to clear menu
 document.body.addEventListener('click',clearMenu,true);

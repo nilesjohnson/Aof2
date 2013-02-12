@@ -30,6 +30,7 @@ var basisElement = function(id,basisType) {
 
 var clearBasisType = function() {
     // clear selection of basis type
+    clearMenu();
     document.getElementById('option-adem').className = 'unselected';
     document.getElementById('option-milnor').className = 'unselected';
     document.getElementById('option-none').className = 'unselected';
