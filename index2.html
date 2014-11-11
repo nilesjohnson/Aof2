@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<title>A(2)</title>
+
+<link rel="stylesheet" href="./css/style.css" />
+
+<!--
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<script>
+$(function() {
+$( "#menu" ).menu();
+});
+</script>
+-->
+
+</head>
+
+<body onload="recomputeCanvasOffset(); return false;">
+
+<h1 id="title">Visualization of \(\mathcal{A}(2)\)</h1>
+<p id="authors">
+<a href="http://www.math.wayne.edu/~rrb/">Robert Bruner</a> and
+<a href="http://www.nilesjohnson.net">Niles Johnson</a>, 2013</p>
+
+<div id="instructions">
+  <!--<h2>Instructions</h2>-->
+
+  <p>The diagram below displays the Steenrod subalgebra
+  \(\mathcal{A}(2)\) by its decomposition into eight left cosets of
+  \(\mathcal{A}(1)\).  Lines connecting these cosets show the left
+  action of \(Sq^1\), \(Sq^2\), and \(Sq^4\) which connects the cosets.  Additional
+  information about this left action is more subtle, and is displayed
+  upon clicking dots.  </p>
+
+  <p>The "Basis type" options determine whether elements
+  are displayed in the Adem (admissible) basis, Milnor basis, or not
+  displayed.  The "Operation" menu selects a subset of operations to
+  act on the selected dot.  Operations which result in a sum are shown
+  by highlighting all summands, and operations which result in zero
+  are shown in the upper left corner.</p>
+
+  <!--
+  <p>For example, if all three operations, \(Sq^1\), \(Sq^2\), and
+  \(Sq^4\) are selected then clicking on the dot corresponding
+  to \(x\) will cause \(Sq^1 x\), \(Sq^2 x\), and \(Sq^4 x\) to be
+  highlighted in the colors corresponding to the menu entries.  A
+  value of zero is indicated by highlighting a dot in the upper left
+  box labelled zero.  If the result is a sum, all terms in the sum
+  will be highlighted.
+  </p>
+  -->
+</div>
+
+
+<div id="app_container">
+<div id="canvas_container"></div>
+
+<div class="options">
+  <ul>
+    <li>&nbsp;
+      <ul>
+	<li><a href="#" onclick="clearAll(); return false;">Clear
+  all</a></li>
+      </ul>
+    </li>
+    <li>Basis type
+      <ul>  
+	<li id="option-adem"><a href="#" onclick="setBasisType('adem'); return false;" title="select type">Adem</a></li>
+	<li id="option-milnor"><a href="#" onclick="setBasisType('milnor'); return false;" title="select type">Milnor</a></li>
+	<li id="option-none"><a href="#" onclick="setBasisType('none'); return false;" title="select type">None</a></li>
+      </ul>
+    </li>
+    <li>Operation
+      <ul>
+	<li id="option-sq1"><a href="#" onclick="toggleOperation('sq1'); return false;" title="toggle display">\(Sq^1\)</a></li>
+	<li id="option-sq2"><a href="#" onclick="toggleOperation('sq2'); return false;" title="toggle display">\(Sq^2\)</a></li>
+	<li id="option-sq4"><a href="#" onclick="toggleOperation('sq4'); return false;" title="toggle display">\(Sq^4\)</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+</div>
+
+
+
+
+<div id="explanation">
+<h2>Explanation of the display</h2>
+<p>
+It is (just barely) possible to represent \(\mathcal{A}(2)\)
+by drawing dots representing a basis for it, together with lines representing
+the left action of 
+\(Sq^1\),
+\(Sq^2\), and
+\(Sq^4\) (see <a href="http://www.staff.science.uu.nl/~henri105/PDF/A2.pdf">
+Andre Henriques' drawing</a>).
+</p>
+
+  <p>The representation here does not show all operations
+  simultaneously.  We break \(\mathcal{A}(2)\) into the 8 left cosets
+  of \(\mathcal{A}(1)\) and give an interactive display of operations.
+  This has several useful features: </p>
+
+<ul>
+  <li> It is 'even-handed', giving 8 subsets of size 8.</li>
+  <li> It is well related to \(ko\)-theory.</li>
+  <li> It has a simple form, since
+    \(\mathcal{A}(2)/\!/\mathcal{A}(1) = \mathcal{A}(2)/\mathcal{A}(2)(Sq^1,Sq^2)\)
+    is concentrated in dimensions 0, 4, 6, 7, 10, 11, 13 and 17.</li>
+</ul>
+
+<p>These cosets are represented by the following elements, which
+appear along the top of the diagram:
+</p>
+
+<!-- simpler version
+<ul>
+<li> \( 1\) </li>
+<li> \( Sq^4\) </li>
+<li> \( Sq^2 Sq^4\) </li>
+<li> \( Sq^3 Sq^4 \) </li>
+<li> \( Sq^4 Sq^2 Sq^4\) </li>
+<li> \(  Sq^5 Sq^2 Sq^4 = Sq^4 Sq^3 Sq^4 \) </li>
+<li> \( Sq^2 Sq^4 Sq^3 Sq^4\) </li>
+<li> \( Sq^4 Sq^2 Sq^4 Sq^3 Sq^4 \) </li>
+</ul>
+-->
+
+
+\begin{align}
+1 & \\
+Sq^4 & \\
+Sq^2 Sq^4 & = Sq^6 + Sq^5 Sq^1 \\
+Sq^1 Sq^2 Sq^4 = Sq^3 Sq^4 & = Sq^7 \\
+Sq^4 Sq^2 Sq^4 & = Sq^{10} + Sq^9 Sq^1 + Sq^8 Sq^2 + Sq^7 Sq^2 Sq^1 \\
+Sq^4 Sq^3 Sq^4 = Sq^5 Sq^2 Sq^4 & = Sq^{11} + Sq^9 Sq^2 \\
+Sq^2 Sq^4 Sq^3 Sq^4 & = Sq^{13} + Sq^{12} Sq^1 + Sq^{10} Sq^3 \\
+Sq^4 Sq^2 Sq^4 Sq^3 Sq^4 & = Sq^{17}
++ Sq^{16} Sq^1
++ Sq^{15} Sq^2
++ Sq^{14} Sq^2 Sq^1
++ Sq^{12} Sq^5
++ Sq^{12} Sq^4 Sq^1
+\end{align}
+
+<p>
+When \(x\) is one of these 8 representatives, 
+the copy of \(\mathcal{A}(1)\) 'hanging' from \(x\) contains all
+the elements in \(x\mathcal{A}(1)\).
+</p>
+
+<p>This gives a description of each element in terms of the generators
+\(Sq^1\), \(Sq^2\), and \(Sq^4\) in the form \(xy\), where \(x\) is
+one of the 8 coset representatives above and \(y\) is an element of
+\(\mathcal{A}(1)\).  For example, the third element from the top in
+the third group from the left has the representation \((Sq^2
+Sq^4)(Sq^2)\).  In the admissable basis, this is \(Sq^6 Sq^2\), which
+is shown when this dot is selected and the "Adem" menu option is on.
+</p>
+
+<p>
+Thus, the cosets are given by left multiplications, while the elements
+within each coset are given by right multiplications.  In this form,
+the left action of \(\mathcal{A}(2)\) on itself is not completely
+clear.  Some information is visible in the lines connecting cosets
+of \(\mathcal{A}(1)\), and the rest is displayed by the operations
+\(Sq^1\), \(Sq^2\), and \(Sq^4\).
+<!--
+The "Operation" menu provides this information.  Some of the
+actions will be obvious, such as \(Sq^2\) acting on the second or
+sixth \(\mathcal{A}(1)\) or \(Sq^4\) acting on the first or next to
+last \(\mathcal{A}(1)\).  The values \(Sq^i x\) are the sums of the
+highlighted items, if nonzero.  If the result is zero, the
+corresponding dot in the upper left box labelled zero is highlighted.
+-->
+</p>
+
+</div>
+
+
+
+
+<div id="element-info" class="info">
+
+
+
+
+<p id="dot-0-0-adem">\(
+1
+\) </p>
+<p id="dot-0-0-milnor">\(
+1
+\) </p>
+<p id="dot-0-1-adem">\(
+Sq^1
+\) </p>
+<p id="dot-0-1-milnor">\(
+Sq(1)
+\) </p>
+<p id="dot-0-2-adem">\(
+Sq^2
+\) </p>
+<p id="dot-0-2-milnor">\(
+Sq(2)
+\) </p>
+<p id="dot-0-3-adem">\(
+Sq^3
+\) </p>
+<p id="dot-0-3-milnor">\(
+Sq(3)
+\) </p>
+<p id="dot-0-4-adem">\(
+Sq^2 Sq^1
+\) </p>
+<p id="dot-0-4-milnor">\(
+Sq(3)
++ Sq(0,1)
+\) </p>
+<p id="dot-0-5-adem">\(
+Sq^3 Sq^1
+\) </p>
+<p id="dot-0-5-milnor">\(
+Sq(1,1)
+\) </p>
+<p id="dot-0-6-adem">\(
+Sq^5
++ Sq^4 Sq^1
+\) </p>
+<p id="dot-0-6-milnor">\(
+Sq(2,1)
+\) </p>
+<p id="dot-0-7-adem">\(
+Sq^5 Sq^1
+\) </p>
+<p id="dot-0-7-milnor">\(
+Sq(3,1)
+\) </p>
+
+<p id="dot-8-0-adem">\(
+Sq^4
+\) </p>
+<p id="dot-8-0-milnor">\(
+Sq(4)
+\) </p>
+<p id="dot-8-1-adem">\(
+Sq^4 Sq^1
+\) </p>
+<p id="dot-8-1-milnor">\(
+Sq(5)
++ Sq(2,1)
+\) </p>
+<p id="dot-8-2-adem">\(
+Sq^4 Sq^2
+\) </p>
+<p id="dot-8-2-milnor">\(
+Sq(6)
++ Sq(3,1)
+\)<br />
+\(
++\ Sq(0,2)
+\) </p>
+<p id="dot-8-3-adem">\(
+Sq^5 Sq^2
+\) </p>
+<p id="dot-8-3-milnor">\(
+Sq(7)
++ Sq(1,2)
+\) </p>
+<p id="dot-8-4-adem">\(
+Sq^4 Sq^2 Sq^1
+\) </p>
+<p id="dot-8-4-milnor">\(
+Sq(7)
++ Sq(4,1)
+\)<br />
+\(
++\ Sq(1,2)
++ Sq(0,0,1)
+\) </p>
+<p id="dot-8-5-adem">\(
+Sq^5 Sq^2 Sq^1
+\) </p>
+<p id="dot-8-5-milnor">\(
+Sq(5,1)
++ Sq(1,0,1)
+\) </p>
+<p id="dot-8-6-adem">\(
+Sq^9
++ Sq^8 Sq^1
++ Sq^7 Sq^2
+\)<br />
+\(
++\ Sq^6 Sq^2 Sq^1
+\) </p>
+<p id="dot-8-6-milnor">\(
+Sq(6,1)
++ Sq(2,0,1)
+\)<br />
+\(
++\ Sq(0,3)
+\) </p>
+<p id="dot-8-7-adem">\(
+Sq^9 Sq^1
++ Sq^7 Sq^2 Sq^1
+\) </p>
+<p id="dot-8-7-milnor">\(
+Sq(7,1)
++ Sq(3,0,1)
+\)<br />
+\(
++\ Sq(1,3)
+\) </p>
+
+
+<p id="dot-12-0-adem">\(
+Sq^6
++ Sq^5 Sq^1
+\) </p>
+<p id="dot-12-0-milnor">\(
+Sq(6)
++ Sq(3,1)
+\) </p>
+<p id="dot-12-1-adem">\(
+Sq^6 Sq^1
+\) </p>
+<p id="dot-12-1-milnor">\(
+Sq(7)
++ Sq(4,1)
+\) </p>
+<p id="dot-12-2-adem">\(
+Sq^6 Sq^2
+\) </p>
+<p id="dot-12-2-milnor">\(
+Sq(5,1)
++ Sq(2,2)
+\) </p>
+<p id="dot-12-3-adem">\(
+Sq^6 Sq^3
+\) </p>
+<p id="dot-12-3-milnor">\(
+Sq(6,1)
++ Sq(3,2)
+\)<br />
+\(
++\ Sq(0,3)
+\) </p>
+<p id="dot-12-4-adem">\(
+Sq^6 Sq^2 Sq^1
+\) </p>
+<p id="dot-12-4-milnor">\(
+Sq(3,2)
++ Sq(2,0,1)
++ Sq(0,3)
+\) </p>
+<p id="dot-12-5-adem">\(
+Sq^6 Sq^3 Sq^1
+\) </p>
+<p id="dot-12-5-milnor">\(
+Sq(7,1)
++ Sq(3,0,1)
+\)<br />
+\(
++\ Sq(0,1,1)
+\) </p>
+<p id="dot-12-6-adem">\(
+Sq^9 Sq^2
++ Sq^8 Sq^3
+\)<br />
+\(
++\ Sq^7 Sq^3 Sq^1
+\) </p>
+<p id="dot-12-6-milnor">\(
+Sq(2,3)
++ Sq(1,1,1)
+\) </p>
+<p id="dot-12-7-adem">\(
+Sq^9 Sq^2 Sq^1
++ Sq^8 Sq^3 Sq^1
+\) </p>
+<p id="dot-12-7-milnor">\(
+Sq(3,3)
++ Sq(2,1,1)
+\) </p>
+
+
+
+<p id="dot-14-0-adem">\(
+Sq^7
+\) </p>
+<p id="dot-14-0-milnor">\(
+Sq(7)
+\) </p>
+<p id="dot-14-1-adem">\(
+Sq^7 Sq^1
+\) </p>
+<p id="dot-14-1-milnor">\(
+Sq(5,1)
+\) </p>
+<p id="dot-14-2-adem">\(
+Sq^7 Sq^2
+\) </p>
+<p id="dot-14-2-milnor">\(
+Sq(3,2)
+\) </p>
+<p id="dot-14-3-adem">\(
+Sq^7 Sq^3
+\) </p>
+<p id="dot-14-3-milnor">\(
+Sq(7,1)
++ Sq(1,3)
+\) </p>
+<p id="dot-14-4-adem">\(
+Sq^7 Sq^2 Sq^1
+\) </p>
+<p id="dot-14-4-milnor">\(
+Sq(3,0,1)
++ Sq(1,3)
+\) </p>
+<p id="dot-14-5-adem">\(
+Sq^7 Sq^3 Sq^1
+\) </p>
+<p id="dot-14-5-milnor">\(
+Sq(1,1,1)
+\) </p>
+<p id="dot-14-6-adem">\(
+Sq^9 Sq^3
+\) </p>
+<p id="dot-14-6-milnor">\(
+Sq(3,3)
+\) </p>
+<p id="dot-14-7-adem">\(
+Sq^9 Sq^3 Sq^1
+\) </p>
+<p id="dot-14-7-milnor">\(
+Sq(3,1,1)
+\) </p>
+
+
+
+
+
+<p id="dot-20-0-adem">\(
+Sq^{10}
++ Sq^9 Sq^1
+\)<br />
+\(
++\ Sq^8 Sq^2
++ Sq^7 Sq^2 Sq^1
+\) </p>
+<p id="dot-20-0-milnor">\(
+Sq(4,2)
++ Sq(3,0,1)
+\)<br />
+\(
++\ Sq(1,3)
+\) </p>
+<p id="dot-20-1-adem">\(
+Sq^{10} Sq^1
++ Sq^8 Sq^2 Sq^1
+\) </p>
+<p id="dot-20-1-milnor">\(
+Sq(5,2)
++ Sq(4,0,1)
+\)<br />
+\(
++\ Sq(2,3)
+\) </p>
+<p id="dot-20-2-adem">\(
+Sq^{10} Sq^2
++ Sq^8 Sq^3 Sq^1
+\) </p>
+<p id="dot-20-2-milnor">\(
+Sq(6,2)
++ Sq(5,0,1)
+\)<br />
+\(
++\ Sq(2,1,1)
+\) </p>
+<p id="dot-20-3-adem">\(
+Sq^{10} Sq^3
++ Sq^9 Sq^4
+\)<br />
+\(
++\ Sq^8 Sq^4 Sq^1
+\) </p>
+<p id="dot-20-3-milnor">\(
+Sq(7,2)
++ Sq(6,0,1)
+\)<br />
+\(
++\ Sq(3,1,1)
++ Sq(0,2,1)
+\) </p>
+<p id="dot-20-4-adem">\(
+Sq^{10} Sq^2 Sq^1
+\) </p>
+<p id="dot-20-4-milnor">\(
+Sq(7,2)
++ Sq(6,0,1)
++ Sq(4,3)
+\) </p>
+<p id="dot-20-5-adem">\(
+Sq^{10} Sq^3 Sq^1
++ Sq^9 Sq^4 Sq^1
+\) </p>
+<p id="dot-20-5-milnor">\(
+Sq(5,3)
++ Sq(4,1,1)
+\)<br />
+\(
++\ Sq(1,2,1)
+\) </p>
+<p id="dot-20-6-adem">\(
+Sq^{10} Sq^5
++ Sq^{10} Sq^4 Sq^1
+\) </p>
+<p id="dot-20-6-milnor">\(
+Sq(6,3)
++ Sq(5,1,1)
+\)<br />
+\(
++\ Sq(2,2,1)
+\) </p>
+<p id="dot-20-7-adem">\(
+Sq^{10} Sq^5 Sq^1
+\) </p>
+<p id="dot-20-7-milnor">\(
+Sq(7,3)
++ Sq(6,1,1)
+\)<br />
+\(
++\ Sq(3,2,1)
++ Sq(0,3,1)
+\) </p>
+
+
+
+
+<p id="dot-22-0-adem">\(
+Sq^{11}
++ Sq^9 Sq^2
+\) </p>
+<p id="dot-22-0-milnor">\(
+Sq(5,2)
+\) </p>
+<p id="dot-22-1-adem">\(
+Sq^{11} Sq^1
++ Sq^9 Sq^2 Sq^1
+\) </p>
+<p id="dot-22-1-milnor">\(
+Sq(5,0,1)
++ Sq(3,3)
+\) </p>
+<p id="dot-22-2-adem">\(
+Sq^{11} Sq^2
++ Sq^9 Sq^3 Sq^1
+\) </p>
+<p id="dot-22-2-milnor">\(
+Sq(7,2)
++ Sq(3,1,1)
+\) </p>
+<p id="dot-22-3-adem">\(
+Sq^{11} Sq^3
++ Sq^9 Sq^4 Sq^1
+\) </p>
+<p id="dot-22-3-milnor">\(
+Sq(7,0,1)
++ Sq(1,2,1)
+\) </p>
+<p id="dot-22-4-adem">\(
+Sq^{11} Sq^2 Sq^1
+\) </p>
+<p id="dot-22-4-milnor">\(
+Sq(7,0,1)
++ Sq(5,3)
+\) </p>
+<p id="dot-22-5-adem">\(
+Sq^{11} Sq^3 Sq^1
+\) </p>
+<p id="dot-22-5-milnor">\(
+Sq(5,1,1)
+\) </p>
+<p id="dot-22-6-adem">\(
+Sq^{11} Sq^5
++ Sq^{11} Sq^4 Sq^1
+\) </p>
+<p id="dot-22-6-milnor">\(
+Sq(7,3)
++ Sq(3,2,1)
+\) </p>
+<p id="dot-22-7-adem">\(
+Sq^{11} Sq^5 Sq^1
+\) </p>
+<p id="dot-22-7-milnor">\(
+Sq(7,1,1)
++ Sq(1,3,1)
+\) </p>
+
+
+
+
+
+
+<p id="dot-26-0-adem">\(
+Sq^{13}
++ Sq^{12} Sq^1
+\)<br />
+\(
++\ Sq^{10} Sq^3
+\) </p>
+<p id="dot-26-0-milnor">\(
+Sq(7,2)
++ Sq(4,3)
+\) </p>
+<p id="dot-26-1-adem">\(
+Sq^{13} Sq^1
++ Sq^{10} Sq^3 Sq^1
+\) </p>
+<p id="dot-26-1-milnor">\(
+Sq(7,0,1)
++ Sq(4,1,1)
+\) </p>
+<p id="dot-26-2-adem">\(
+Sq^{13} Sq^2
++ Sq^{12} Sq^3
+\) </p>
+<p id="dot-26-2-milnor">\(
+Sq(6,3)
+\) </p>
+<p id="dot-26-3-adem">\(
+Sq^{13} Sq^3
++ Sq^{10} Sq^5 Sq^1
+\) </p>
+<p id="dot-26-3-milnor">\(
+Sq(6,1,1)
++ Sq(3,2,1)
+\)<br />
+\(
++\ Sq(0,3,1)
+\) </p>
+<p id="dot-26-4-adem">\(
+Sq^{13} Sq^2 Sq^1
++ Sq^{12} Sq^3 Sq^1
+\) </p>
+<p id="dot-26-4-milnor">\(
+Sq(7,3)
++ Sq(6,1,1)
+\) </p>
+<p id="dot-26-5-adem">\(
+Sq^{13} Sq^3 Sq^1
+\) </p>
+<p id="dot-26-5-milnor">\(
+Sq(7,1,1)
+\) </p>
+<p id="dot-26-6-adem">\(
+Sq^{13} Sq^5
++ Sq^{13} Sq^4 Sq^1
+\)<br />
+\(
++\ Sq^{12} Sq^5 Sq^1
+\) </p>
+<p id="dot-26-6-milnor">\(
+Sq(2,3,1)
+\) </p>
+<p id="dot-26-7-adem">\(
+Sq^{13} Sq^5 Sq^1
+\) </p>
+<p id="dot-26-7-milnor">\(
+Sq(3,3,1)
+\) </p>
+
+
+
+<p id="dot-34-0-adem">\(
+Sq^{17}
++\ Sq^{16} Sq^1
+\)<br />
+\(
++\ Sq^{15} Sq^2
++\ Sq^{14} Sq^2 Sq^1
+\)<br />
+\(
++\ Sq^{12} Sq^5
++\ Sq^{12} Sq^4 Sq^1
+\) </p>
+<p id="dot-34-0-milnor">\(
+Sq(7,1,1)
++\ Sq(4,2,1)
+\) </p>
+<p id="dot-34-1-adem">\(
+Sq^{17} Sq^1
++\ Sq^{15} Sq^2 Sq^1
+\)<br />
+\(
++\ Sq^{12} Sq^5 Sq^1
+\) </p>
+<p id="dot-34-1-milnor">\(
+Sq(5,2,1)
++\ Sq(2,3,1)
+\) </p>
+<p id="dot-34-2-adem">\(
+Sq^{17} Sq^2
++\ Sq^{16} Sq^3
+\)<br />
+\(
++\ Sq^{15} Sq^3 Sq^1
++\ Sq^{14} Sq^5
+\)<br />
+\(
++\ Sq^{14} Sq^4 Sq^1
+\) </p>
+<p id="dot-34-2-milnor">\(
+Sq(6,2,1)
+\) </p>
+<p id="dot-34-3-adem">\(
+Sq^{17} Sq^3
++\ Sq^{15} Sq^5
+\)<br />
+\(
++\ Sq^{15} Sq^4 Sq^1
+\) </p>
+<p id="dot-34-3-milnor">\(
+Sq(7,2,1)
+\) </p>
+<p id="dot-34-4-adem">\(
+Sq^{17} Sq^2 Sq^1
++\ Sq^{16} Sq^3 Sq^1
+\)<br />
+\(
++\ Sq^{14} Sq^5 Sq^1
+\) </p>
+<p id="dot-34-4-milnor">\(
+Sq(7,2,1)
++\ Sq(4,3,1)
+\) </p>
+<p id="dot-34-5-adem">\(
+Sq^{17} Sq^3 Sq^1
++\ Sq^{15} Sq^5 Sq^1
+\) </p>
+<p id="dot-34-5-milnor">\(
+Sq(5,3,1)
+\) </p>
+<p id="dot-34-6-adem">\(
+Sq^{17} Sq^5
++\ Sq^{17} Sq^4 Sq^1
+\)<br />
+\(
++\ Sq^{16} Sq^5 Sq^1
+\) </p>
+<p id="dot-34-6-milnor">\(
+Sq(6,3,1)
+\) </p>
+<p id="dot-34-7-adem">\(
+Sq^{17} Sq^5 Sq^1
+\) </p>
+<p id="dot-34-7-milnor">\(
+Sq(7,3,1)
+\) </p>
+
+
+</div>
+
+
+
+<h3>About this page</h3>
+
+<p>Version 1.0, 02/2013.  Source code is available in our 
+<a href="https://bitbucket.org/nilesjohnson/aof2/">git repository</a>.
+The math symbols are rendered
+with <a href="http://www.mathjax.org/">MathJax</a>, and the
+interactive diagram is drawn
+with <a href="http://raphaeljs.com/">Raphaël.js</a>.
+</p>
+
+<p>This application is licensed under the terms of the <a href="http://www.gnu.org/licenses/gpl.html">GNU General Public License</a> version 3 or later.  For details see <a href="README.txt">README.txt</a>.
+
+
+</body>
+
+
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<script type="text/javascript" src="./js/raphael-min.js"></script>  
+<script type="text/javascript" src="./js/Aof2-click-handlers.js"></script>
+<script type="text/javascript" src="./js/Aof2-aux-functions.js"></script> 
+<script type="text/javascript" src="./js/Aof2-sqi-data.js"></script> 
+<script type="text/javascript" src="./js/Aof2-setup.js"></script> 
+<script>
+  MathJax.Hub.Queue(function () {
+  recomputeCanvasOffset();
+  });
+</script>
+
+<!-- Google analytics -->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11180825-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</html>
