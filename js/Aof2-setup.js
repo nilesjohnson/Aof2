@@ -67,6 +67,11 @@ var dotAttr = {
     'stroke': '#8d0c28',
     r: dotWidth
 };
+var zebraDotAttr = {
+    'stroke-width':0,
+    r: 2.5*dotWidth,
+    'fill':'#aaccff'
+}
 var dotAttrZero = {
     'opacity': '0'
 }
@@ -99,6 +104,11 @@ var pathBottomAttr = {
 var pathTopAttr = {
     'stroke': '#000',
     'stroke-width': '1'
+};
+var zebraPathTopAttr = {
+    'stroke': '#7799cc',
+    'stroke-width': '3',
+    'opacity': .7
 };
 
 var infoAttr = {
@@ -230,9 +240,10 @@ var aOfOne = function(x,y,i) {
 	var xc = (x1 + x0)/2 + pm*.5*(y1 - y0);
 	var yc = (y1 + y0)/2 + pm*.1*(x1 - x0);
 	var path = paper.path([["M", x0, y0],["Q", xc,yc, x1,y1]]).toBack();
-	path.attr(pathTopAttr);	
+	path.attr(pathTopAttr);
     }
 };
+
 
 // offset positions for copies of A(1)
 aOfOneOffset = [[0,0], // made aspect ratio 2 to 1, so vertical position equals
@@ -250,6 +261,29 @@ for (var i=0; i < aOfOneOffset.length; i++) {
     y = aOfOneOffset[i][1];
     aOfOne(aOfTwoStartX+x*gridSize, aOfTwoStartY + y*gridSize,x);
 };
+
+
+// highlight zebra
+var showZebra = function() {
+    zebraOffset = [[0,0],
+		   [8,4],
+		   [12,6],
+		   [20,10]];
+    for (var i=0; i < zebraOffset.length; i++) {
+	x = zebraOffset[i][0];
+	y = zebraOffset[i][1];
+	//aOfOne(aOfTwoStartX+x*gridSize, aOfTwoStartY + y*gridSize,x+100);
+	//paper.ellipse(aOfTwoStartX+x*gridSize, aOfTwoStartY + (y+3)*gridSize,.65*gridSize,3.8*gridSize).attr(zebraDotAttr);
+	//paper.ellipse(aOfTwoStartX+x*gridSize, aOfTwoStartY + (y+3)*gridSize,1.3*gridSize,1*gridSize).attr(zebraDotAttr);
+	paper.ellipse(aOfTwoStartX+(x+.3)*gridSize, aOfTwoStartY + (y+3-.4)*gridSize,1.2*gridSize,1.2*gridSize).attr(zebraDotAttr).toBack();
+	paper.ellipse(aOfTwoStartX+(x-.3)*gridSize, aOfTwoStartY + (y+3+.4)*gridSize,1.2*gridSize,1.2*gridSize).attr(zebraDotAttr).toBack();
+	paper.ellipse(aOfTwoStartX+(x-.05)*gridSize, aOfTwoStartY + (y+.9)*gridSize,.85*gridSize,1.55*gridSize).attr(zebraDotAttr).toBack();
+	paper.ellipse(aOfTwoStartX+(x+.05)*gridSize, aOfTwoStartY + (y+5.1)*gridSize,.85*gridSize,1.55*gridSize).attr(zebraDotAttr).toBack();
+	paperGrid.toBack();
+    };
+}
+
+
 
 // connect copies of A(1)
 // list pairs of indices of top nodes
