@@ -29,7 +29,8 @@ NOTES
 
 The source code for this project is available as a git repository
 
-https://bitbucket.org/nilesjohnson/aof2
+https://github.com/nilesjohnson/Aof2
 
 
 * Version 1.0: initial release
+* Update 2017-04-03: highlight Bhattacharya's Z
