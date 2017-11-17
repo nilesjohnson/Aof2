@@ -33,4 +33,4 @@ https://github.com/nilesjohnson/Aof2
 
 
 * Version 1.0: initial release
-* Update 2017-04-03: highlight Bhattacharya's Z
+* Update 2017-04-03: highlight Bhattacharya-Egger Z
